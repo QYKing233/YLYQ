@@ -1,1 +1,46 @@
+#!/bin/bash
 
+# 检查是否支持 PWM
+if [ ! -d /sys/class/pwm/pwmchip0 ]; then
+    echo "This model does not support PWM."
+    exit 1
+fi
+
+# 导出 PWM 通道
+if [ ! -d /sys/class/pwm/pwmchip0/pwm0 ]; then
+    echo -n 0 > /sys/class/pwm/pwmchip0/export
+    sleep 1
+fi
+
+# 确保 pwm0 已经导出成功
+while [ ! -d /sys/class/pwm/pwmchip0/pwm0 ]; do
+    sleep 1
+done
+
+# 禁用 PWM 通道（如果已启用）
+ISENABLE=$(cat /sys/class/pwm/pwmchip0/pwm0/enable)
+if [ $ISENABLE -eq 1 ]; then
+    echo -n 0 > /sys/class/pwm/pwmchip0/pwm0/enable
+fi
+
+# 配置 PWM 参数并启用
+echo -n 50000 > /sys/class/pwm/pwmchip0/pwm0/period
+echo -n 1 > /sys/class/pwm/pwmchip0/pwm0/enable
+
+# 定义温度阈值和相应操作
+high_threshold_temp=50000  # 单位：0.001 °C，即 50°C
+low_threshold_temp=45000  # 单位：0.001 °C，即 45°C
+
+while true; do
+    temp=$(cat /sys/class/thermal/thermal_zone0/temp)
+    if [ $temp -gt $high_threshold_temp ]; then
+        # CPU 温度大于 50°C，设置最大速度
+        echo -n 46990 > /sys/class/pwm/pwmchip0/pwm0/duty_cycle
+        sleep 5
+    elif [ $temp -lt $low_threshold_temp ]; then
+        # CPU 温度低于等于 45°C，关闭风扇
+        echo -n 49990 > /sys/class/pwm/pwmchip0/pwm0/duty_cycle
+    fi
+    
+    sleep 2
+done
