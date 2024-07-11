@@ -1,0 +1,15 @@
+#!/bin/sh /etc/rc.common
+
+START=99
+
+start() {
+    echo "Starting oled"
+    while true
+    do
+      if ! pgrep -f "oled.py" > /dev/null
+      then
+        python3 /etc/oled/oled.py &
+      fi
+        sleep 60
+    done &
+}
