@@ -173,11 +173,9 @@ git clone -b openwrt-23.05 --depth=1 https://github.com/openwrt/packages ./gcc
 mv ./gcc/devel/gcc ./feeds/packages/devel
 rm -rf ./gcc
 
-# mkdir -p feeds/packages/lang/python/host-pip-requirements/patches
-# pushd feeds/packages/lang/python/host-pip-requirements/patches
-# wget https://raw.githubusercontent.com/QYKing233/YLYQ/main/patch/001-fix_setuptools.patch
-# chmod 0755 ./*
-# popd
+rm -rf ./feeds/packages/lang/python/host-pip-requirements/setuptools-scm.txt
+mv ./setuptools-scm.txt ./feeds/packages/lang/python/host-pip-requirements/
+
 
 
 # 调整主题为黑暗模式
