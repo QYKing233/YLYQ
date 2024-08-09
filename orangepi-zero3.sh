@@ -243,12 +243,6 @@ pushd  ./target/linux/sunxi/base-files/etc/init.d/
 chmod 0755 ./oled
 popd
 
-# 添加 sh1106 oled service_management_start
-mv ./lede-orangepi-zero3/service_management_start/S99oled ./target/linux/sunxi/base-files/etc/rc.d/
-pushd  ./target/linux/sunxi/base-files/etc/rc.d/
-chmod 0755 ./S99oled
-popd
-
 # 添加 reload_yt8531c service_management
 mv ./lede-orangepi-zero3/service_management/reload_yt8531c ./target/linux/sunxi/base-files/etc/init.d/
 pushd  ./target/linux/sunxi/base-files/etc/init.d/
@@ -256,9 +250,9 @@ chmod 0755 ./reload_yt8531c
 popd
 
 # 添加 reload_yt8531c service_management_start
-mv ./lede-orangepi-zero3/service_management_start/S50reload_yt8531c ./target/linux/sunxi/base-files/etc/rc.d/
+mv ./lede-orangepi-zero3/service_management_start/S99reload_yt8531c ./target/linux/sunxi/base-files/etc/rc.d/
 pushd  ./target/linux/sunxi/base-files/etc/rc.d/
-chmod 0755 ./S50reload_yt8531c
+chmod 0755 ./S99reload_yt8531c
 popd
 
 # 添加 pwm-fan shell scripts
