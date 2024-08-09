@@ -1,10 +1,12 @@
 #!/bin/bash
 
-# 导出 GPIO 通道
-echo -n 226 > /sys/class/gpio/export
 
-# 设置 gpio 226 引脚为输出模式
-echo out > /sys/class/gpio/gpio226/direction
+# 检查 GPIO226 目录是否存在
+if [! -d /sys/class/gpio/gpio226]; then
+    echo 226 > /sys/class/gpio/export
+    sleep 2
+    echo out > /sys/class/gpio/gpio226/direction
+fi
 
 # 定义温度阈值和相应操作
 high_threshold_temp=55000  # 单位：0.001 °C，即 55°C
