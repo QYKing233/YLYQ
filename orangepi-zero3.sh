@@ -1,11 +1,11 @@
 #!/bin/bash
 
 
-# 创建community目录
+# 创建 community 目录
 mkdir -p package/community
 
 
-# 把community目录置为当前
+# 把 community 目录置为当前
 pushd package/community
 
 
@@ -20,7 +20,6 @@ git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall-packages.git
 
 # 添加 luci-app-ssr-plus
 git clone --depth=1 https://github.com/fw876/helloworld.git
-
 
 
 # 添加 luci-app-argon-config & luci-app-argon 
@@ -43,11 +42,11 @@ git clone --depth=1 https://github.com/sirpdboy/luci-app-ddns-go.git
 popd
 
 
-# 创建repo目录
+# 创建 repo 目录
 mkdir -p ./package/repo
 
 
-# 把repo目录置为当前
+# 把 repo 目录置为当前
 pushd ./package/repo
 
 
@@ -227,18 +226,18 @@ wget https://raw.githubusercontent.com/QYKing233/YLYQ_X86/main/data/.zshrc
 popd
 
 
-# 克隆  lede-orangepi-zero3
+# 克隆 lede-orangepi-zero3
 git clone https://github.com/QYKing233/lede-orangepi-zero3.git
 mkdir -p ./target/linux/sunxi/base-files/etc/oled
 mkdir -p ./target/linux/sunxi/base-files/etc/init.d
 
-# 添加  sh1106 oled python scripts
+# 添加 sh1106 oled python scripts
 mv ./lede-orangepi-zero3/oled/* ./target/linux/sunxi/base-files/etc/oled/
 pushd  ./target/linux/sunxi/base-files/etc/oled/
 chmod 0755 ./*
 popd
 
-# 添加  sh1106 oled service_management
+# 添加 sh1106 oled service_management
 mv ./lede-orangepi-zero3/service_management/oled ./target/linux/sunxi/base-files/etc/init.d/
 pushd  ./target/linux/sunxi/base-files/etc/init.d/
 chmod 0755 ./oled
@@ -249,7 +248,6 @@ mv ./lede-orangepi-zero3/service_management/reload_yt8531c ./target/linux/sunxi/
 pushd  ./target/linux/sunxi/base-files/etc/init.d/
 chmod 0755 ./reload_yt8531c
 popd
-
 
 # 添加  king patch
 cp ./lede-orangepi-zero3/patch/* ./target/linux/sunxi/patches-6.1/
