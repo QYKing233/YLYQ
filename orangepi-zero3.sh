@@ -228,6 +228,8 @@ popd
 git clone https://github.com/QYKing233/lede-orangepi-zero3.git
 mkdir -p ./target/linux/sunxi/base-files/etc/oled
 mkdir -p ./target/linux/sunxi/base-files/etc/init.d
+mkdir -p ./target/linux/sunxi/base-files/etc/rc.d
+mkdir -p ./target/linux/sunxi/base-files/usr/bin
 
 # 添加 sh1106 oled python scripts
 mv ./lede-orangepi-zero3/oled/* ./target/linux/sunxi/base-files/etc/oled/
@@ -241,10 +243,40 @@ pushd  ./target/linux/sunxi/base-files/etc/init.d/
 chmod 0755 ./oled
 popd
 
-# 添加 reload_yt8531c
+# 添加 sh1106 oled service_management_start
+mv ./lede-orangepi-zero3/service_management_start/S99oled ./target/linux/sunxi/base-files/etc/rc.d/
+pushd  ./target/linux/sunxi/base-files/etc/rc.d/
+chmod 0755 ./S99oled
+popd
+
+# 添加 reload_yt8531c service_management
 mv ./lede-orangepi-zero3/service_management/reload_yt8531c ./target/linux/sunxi/base-files/etc/init.d/
 pushd  ./target/linux/sunxi/base-files/etc/init.d/
 chmod 0755 ./reload_yt8531c
+popd
+
+# 添加 reload_yt8531c service_management_start
+mv ./lede-orangepi-zero3/service_management_start/S50reload_yt8531c ./target/linux/sunxi/base-files/etc/rc.d/
+pushd  ./target/linux/sunxi/base-files/etc/rc.d/
+chmod 0755 ./S50reload_yt8531c
+popd
+
+# 添加 pwm-fan shell scripts
+mv ./lede-orangepi-zero3/shell_scripts/pwm-fan.sh ./target/linux/sunxi/base-files/usr/bin/
+pushd  ./target/linux/sunxi/base-files/usr/bin/
+chmod 0755 ./pwm-fan.sh
+popd
+
+# 添加 pwm-fan service_management
+mv ./lede-orangepi-zero3/service_management/pwm-fan ./target/linux/sunxi/base-files/etc/init.d/
+pushd  ./target/linux/sunxi/base-files/etc/init.d/
+chmod 0755 ./pwm-fan
+popd
+
+# 添加 pwm-fan service_management_start
+mv ./lede-orangepi-zero3/service_management_start/S21pwm-fan ./target/linux/sunxi/base-files/etc/rc.d/
+pushd  ./target/linux/sunxi/base-files/etc/rc.d/
+chmod 0755 ./S21pwm-fan
 popd
 
 # 添加  king patch
