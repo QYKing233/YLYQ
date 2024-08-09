@@ -2,32 +2,15 @@
 
 START=21
 
-PROG="pwm-fan"
-PROG_PATH="/usr/bin/pwm-fan.sh"
-PID_PATH="/var/run"
 
 start() {
-    if [ -e "$PID_PATH/$PROG.pid" ]; then
-        echo "Error! $PROG is currently running!" 1>&2
-        exit 1
-    else
-        $PROG_PATH 2>&1 > /var/log/$PROG & pid=`ps | grep -i $PROG_PATH | grep -v grep | awk '{print $1}'`
-        echo "$PROG started"
-        echo $pid > "$PID_PATH/$PROG.pid"
-    fi
+    echo "Starting pwm-fan"
+    while true
+    do
+      if ! pgrep -f "pwm-fan.sh" > /dev/null
+      then
+        /usr/bin/pwm-fan.sh &
+      fi
+        sleep 60
+    done &
 }
-
-stop() {
-    if [ -e "$PID_PATH/$PROG.pid" ]; then
-        kill `cat $PID_PATH/$PROG.pid`
-        rm -f "$PID_PATH/$PROG.pid"
-    else
-        echo "Error! $PROG is not running!" 1>&2
-        exit 1
-    fi
-}
-
-restart() {
-    stop
-    start
-}# 
