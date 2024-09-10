@@ -18,7 +18,8 @@ def format_size(bytes_value):
 
 
 def cpu_usage():
-    return psutil.cpu_percent(interval=None)
+    result = psutil.cpu_percent(interval=None)
+    return int(result)
 
 
 def memory_usage():
@@ -73,7 +74,7 @@ if __name__ == '__main__':
             download, upload = network_io()
             with canvas(device) as draw:
                 draw.text((0, 0), f"TMP: {cpu_temperature():.1f}°C", fill=255, font=font)
-                draw.text((0, 10), f"CPU: {cpu_usage()}%/{freq()}MHz", fill=255, font=font)
+                draw.text((0, 10), f"CPU: {freq()}MHz[{cpu_usage()}%]", fill=255, font=font)
                 draw.text((0, 21), f"RAM: {mem_used}/{mem_total}", fill=255, font=font)
                 draw.text((0, 32), f"HDD: {disk_use}/{disk_total}", fill=255, font=font)
                 draw.text((0, 43), f"LAN: {ip_address()}", fill=255, font=font)
