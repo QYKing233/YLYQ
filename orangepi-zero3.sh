@@ -76,7 +76,6 @@ rm -rf ./*
 
 # 添加 luci-app-fileassistant & luci-app-beardropper & luci-app-gost
 git clone --depth=1 https://github.com/kenzok8/small-package.git
-mv ./small-package/luci-app-fileassistant ../community
 mv ./small-package/luci-app-gost ../community
 mv ./small-package/gost ../community
 mv ./small-package/luci-app-beardropper ../community
@@ -90,11 +89,6 @@ git clone --depth=1 https://github.com/QiuSimons/OpenWrt-Add.git
 mv ./OpenWrt-Add/luci-app-irqbalance ../community
 rm -rf ./*
 
-
-# 添加 luci-app-unblockneteasemusic
-git clone -b master --depth=1 https://github.com/UnblockNeteaseMusic/luci-app-unblockneteasemusic.git
-mv ./luci-app-unblockneteasemusic ../community
-
 popd
 
 
@@ -102,11 +96,6 @@ popd
 sed -i 's/services/nas/g' ./package/community/luci-app-filebrowser/luasrc/controller/*.lua
 sed -i 's/services/nas/g' ./package/community/luci-app-filebrowser/luasrc/view/filebrowser/*.htm
 sed -i 's/services/nas/g' ./package/community/luci-app-filebrowser/luasrc/model/cbi/filebrowser/*.lua
-
-
-# 调整 luci-app-fileassistant 到 NAS 菜单
-sed -i 's/admin/nas/g' ./package/community/luci-app-fileassistant/luasrc/controller/*.lua
-sed -i 's/admin/nas/g' ./package/community/luci-app-fileassistant/luasrc/view/*.htm
 
 
 # 调整 luci-app-aliyundrive-fuse 到 NAS 菜单
@@ -255,22 +244,22 @@ pushd  ./target/linux/sunxi/base-files/etc/rc.d/
 chmod 0755 ./S99reload_yt8531c
 popd
 
-# 添加 pwm-fan shell scripts
-mv ./lede-orangepi-zero3/shell_scripts/pwm-fan.sh ./target/linux/sunxi/base-files/usr/bin/
+# 添加 gpio-fan shell scripts
+mv ./lede-orangepi-zero3/shell_scripts/gpio-fan.sh ./target/linux/sunxi/base-files/usr/bin/
 pushd  ./target/linux/sunxi/base-files/usr/bin/
-chmod 0755 ./pwm-fan.sh
+chmod 0755 ./gpio-fan.sh
 popd
 
-# 添加 pwm-fan service_management
-mv ./lede-orangepi-zero3/service_management/pwm-fan ./target/linux/sunxi/base-files/etc/init.d/
+# 添加 gpio-fan service_management
+mv ./lede-orangepi-zero3/service_management/gpio-fan ./target/linux/sunxi/base-files/etc/init.d/
 pushd  ./target/linux/sunxi/base-files/etc/init.d/
-chmod 0755 ./pwm-fan
+chmod 0755 ./gpio-fan
 popd
 
-# 添加 pwm-fan service_management_start
-mv ./lede-orangepi-zero3/service_management_start/S21pwm-fan ./target/linux/sunxi/base-files/etc/rc.d/
+# 添加 gpio-fan service_management_start
+mv ./lede-orangepi-zero3/service_management_start/S21gpio-fan ./target/linux/sunxi/base-files/etc/rc.d/
 pushd  ./target/linux/sunxi/base-files/etc/rc.d/
-chmod 0755 ./S21pwm-fan
+chmod 0755 ./S21gpio-fan
 popd
 
 # 添加  king patch
