@@ -74,7 +74,7 @@ mv ./luci/applications/luci-app-syncthing ../community
 rm -rf ./*
 
 
-# 添加 luci-app-fileassistant & luci-app-beardropper & luci-app-gost
+# 添加 luci-app-beardropper & luci-app-gost & luci-app-onliner & luci-app-poweroff
 git clone --depth=1 https://github.com/kenzok8/small-package.git
 mv ./small-package/luci-app-gost ../community
 mv ./small-package/gost ../community
