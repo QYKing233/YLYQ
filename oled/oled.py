@@ -36,6 +36,11 @@ def freq():
     return int(result)
 
 
+def fan_status():
+    result = subprocess.run(["cat", "/sys/class/gpio/gpio74/value"], capture_output=True, text=True)
+    return int(result.stdout)
+
+
 def disk(mount_point):
     du = psutil.disk_usage(mount_point)
     return format_size(du.used), format_size(du.total)
@@ -73,6 +78,8 @@ if __name__ == '__main__':
             disk_use, disk_total = disk('/opt')
             download, upload = network_io()
             with canvas(device) as draw:
+                if fan_status() == 1:
+                    draw.text((0, 0), f"{'*':>18}", fill=255, font=font)
                 draw.text((0, 0), f"TMP: {cpu_temperature():.1f}°C", fill=255, font=font)
                 draw.text((0, 10), f"CPU: {freq()}MHz[{cpu_usage()}%]", fill=255, font=font)
                 draw.text((0, 21), f"RAM: {mem_used}/{mem_total}", fill=255, font=font)
