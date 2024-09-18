@@ -1,0 +1,16 @@
+#!/bin/sh /etc/rc.common
+
+START=21
+
+
+start() {
+    echo "Starting gpio-fan"
+    while true
+    do
+      if ! pgrep -f "gpio-fan.sh" > /dev/null
+      then
+        /usr/bin/gpio-fan.sh &
+      fi
+        sleep 60
+    done &
+}
