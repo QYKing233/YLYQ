@@ -76,8 +76,8 @@ rm -rf ./*
 
 # 添加 luci-app-beardropper & luci-app-gost & luci-app-onliner & luci-app-poweroff
 git clone --depth=1 https://github.com/kenzok8/small-package.git
-mv ./small-package/luci-app-gost ../community
-mv ./small-package/gost ../community
+# mv ./small-package/luci-app-gost ../community
+# mv ./small-package/gost ../community
 mv ./small-package/luci-app-beardropper ../community
 mv ./small-package/luci-app-onliner ../community
 mv ./small-package/luci-app-poweroff ../community
@@ -105,9 +105,9 @@ sed -i 's/services/nas/g' ./feeds/luci/applications/luci-app-aliyundrive-fuse/lu
 
 
 # 调整 luci-app-gost 到 VPN 菜单
-sed -i 's/services/vpn/g' ./package/community/luci-app-gost/luasrc/controller/*.lua
-sed -i 's/services/vpn/g' ./package/community/luci-app-gost/luasrc/model/cbi/*.lua
-sed -i 's/services/vpn/g' ./package/community/luci-app-gost/luasrc/view/gost/*.htm
+# sed -i 's/services/vpn/g' ./package/community/luci-app-gost/luasrc/controller/*.lua
+# sed -i 's/services/vpn/g' ./package/community/luci-app-gost/luasrc/model/cbi/*.lua
+# sed -i 's/services/vpn/g' ./package/community/luci-app-gost/luasrc/view/gost/*.htm
 
 
 # 调整 luci-app-v2ray-server 到 VPN 菜单
