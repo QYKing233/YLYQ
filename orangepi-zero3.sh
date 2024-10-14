@@ -162,9 +162,6 @@ git clone -b openwrt-23.05 --depth=1 https://github.com/openwrt/packages ./gcc
 mv ./gcc/devel/gcc ./feeds/packages/devel
 rm -rf ./gcc
 
-rm -rf ./feeds/packages/lang/python/host-pip-requirements/setuptools-scm.txt
-mv ./setuptools-scm.txt ./feeds/packages/lang/python/host-pip-requirements/
-
 
 
 # 调整主题为黑暗模式
@@ -220,17 +217,29 @@ mkdir -p ./target/linux/sunxi/base-files/etc/init.d
 mkdir -p ./target/linux/sunxi/base-files/etc/rc.d
 mkdir -p ./target/linux/sunxi/base-files/usr/bin
 
-# 添加 sh1106 oled python scripts
+
+# 添加 oled files
 mv ./lede-orangepi-zero3/oled/* ./target/linux/sunxi/base-files/etc/oled/
 pushd  ./target/linux/sunxi/base-files/etc/oled/
 chmod 0755 ./*
 popd
 
-# 添加 sh1106 oled service_management
+
+# 添加 gpio_fan shell scripts
+mv ./lede-orangepi-zero3/shell_scripts/gpio_fan.sh ./target/linux/sunxi/base-files/usr/bin/
+pushd  ./target/linux/sunxi/base-files/usr/bin/
+chmod 0755 ./gpio_fan.sh
+popd
+
+
+# 添加 oled service_management
 mv ./lede-orangepi-zero3/service_management/oled ./target/linux/sunxi/base-files/etc/init.d/
+mv ./lede-orangepi-zero3/service_management/check_luma ./target/linux/sunxi/base-files/etc/init.d/
 pushd  ./target/linux/sunxi/base-files/etc/init.d/
 chmod 0755 ./oled
+chmod 0755 ./check_luma
 popd
+
 
 # 添加 reload_yt8531c service_management
 mv ./lede-orangepi-zero3/service_management/reload_yt8531c ./target/linux/sunxi/base-files/etc/init.d/
@@ -238,29 +247,46 @@ pushd  ./target/linux/sunxi/base-files/etc/init.d/
 chmod 0755 ./reload_yt8531c
 popd
 
+
+# 添加 gpio_fan service_management
+mv ./lede-orangepi-zero3/service_management/gpio_fan ./target/linux/sunxi/base-files/etc/init.d/
+pushd  ./target/linux/sunxi/base-files/etc/init.d/
+chmod 0755 ./gpio_fan
+popd
+
+
 # 添加 reload_yt8531c service_management_start
 mv ./lede-orangepi-zero3/service_management_start/S99reload_yt8531c ./target/linux/sunxi/base-files/etc/rc.d/
 pushd  ./target/linux/sunxi/base-files/etc/rc.d/
 chmod 0755 ./S99reload_yt8531c
 popd
 
-# 添加 gpio-fan shell scripts
-mv ./lede-orangepi-zero3/shell_scripts/gpio-fan.sh ./target/linux/sunxi/base-files/usr/bin/
-pushd  ./target/linux/sunxi/base-files/usr/bin/
-chmod 0755 ./gpio-fan.sh
-popd
 
-# 添加 gpio-fan service_management
-mv ./lede-orangepi-zero3/service_management/gpio-fan ./target/linux/sunxi/base-files/etc/init.d/
-pushd  ./target/linux/sunxi/base-files/etc/init.d/
-chmod 0755 ./gpio-fan
-popd
-
-# 添加 gpio-fan service_management_start
-mv ./lede-orangepi-zero3/service_management_start/S21gpio-fan ./target/linux/sunxi/base-files/etc/rc.d/
+# 添加 gpio_fan service_management_start
+mv ./lede-orangepi-zero3/service_management_start/S21gpio_fan ./target/linux/sunxi/base-files/etc/rc.d/
 pushd  ./target/linux/sunxi/base-files/etc/rc.d/
-chmod 0755 ./S21gpio-fan
+chmod 0755 ./S21gpio_fan
 popd
+
+
+# 添加 check_luma service_management_start
+mv ./lede-orangepi-zero3/service_management_start/S99check_luma ./target/linux/sunxi/base-files/etc/rc.d/
+pushd  ./target/linux/sunxi/base-files/etc/rc.d/
+chmod 0755 ./S99check_luma
+popd
+
+
+# 添加 oled service_management_start
+mv ./lede-orangepi-zero3/service_management_start/S99oled ./target/linux/sunxi/base-files/etc/rc.d/
+pushd  ./target/linux/sunxi/base-files/etc/rc.d/
+chmod 0755 ./S99oled
+popd
+
+
+# 修复 python3 编译失败
+rm -rf ./feeds/packages/lang/python/host-pip-requirements/setuptools-scm.txt
+mv ./setuptools-scm.txt ./feeds/packages/lang/python/host-pip-requirements/
+
 
 # 添加  king patch
 cp ./lede-orangepi-zero3/patch/* ./target/linux/sunxi/patches-6.1/

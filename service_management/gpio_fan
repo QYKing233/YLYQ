@@ -4,12 +4,12 @@ START=21
 
 
 start() {
-    echo "Starting gpio-fan"
+    echo "Starting gpio_fan"
     while true
     do
-      if ! pgrep -f "gpio-fan.sh" > /dev/null
+      if ! pgrep -f "gpio_fan.sh" > /dev/null
       then
-        /usr/bin/gpio-fan.sh &
+        /usr/bin/gpio_fan.sh &
       fi
         sleep 60
     done &
