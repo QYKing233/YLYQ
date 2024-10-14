@@ -39,6 +39,7 @@ git clone -b 18.06 --depth=1 https://github.com/xiaozhuai/luci-app-filebrowser.g
 git clone --depth=1 https://github.com/sirpdboy/luci-app-ddns-go.git
 
 
+# 退出 community 目录
 popd
 
 
@@ -89,6 +90,8 @@ git clone --depth=1 https://github.com/QiuSimons/OpenWrt-Add.git
 mv ./OpenWrt-Add/luci-app-irqbalance ../community
 rm -rf ./*
 
+
+# 退出 repo 目录
 popd
 
 
@@ -128,10 +131,10 @@ sed -i 's/ipaddr/string/g' ./feeds/luci/applications/luci-app-nps/luasrc/model/c
 sed -i '/Must an IPv4 address/d' ./feeds/luci/applications/luci-app-nps/luasrc/model/cbi/nps.lua
 
 
-
 # 调整 ShadowsocksR Plus+ 的 wireguard 本地地址数据类型为 string
 sed -i '857 s/cidr/string/g' ./package/community/helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/client-config.lua
 sed -i '882 s/cidr/string/g' ./package/community/helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/client-config.lua
+
 
 # 调整 Makefile 文件中 include 的路径
 sed -i 's/..\/..\/luci.mk/$(TOPDIR)\/feeds\/luci\/luci.mk/g' ./package/community/*/Makefile
@@ -151,8 +154,7 @@ sudo apt-get install libfuse-dev && y
 # 调整 luci-theme-argon 的背景图片 
 pushd package/community/luci-theme-argon/htdocs/luci-static/argon/img
 rm -rf ./bg1.jpg
-wget https://raw.githubusercontent.com/QYKing233/YLYQ_X86/main/data/bg2.jpg
-mv ./bg2.jpg ./bg1.jpg
+wget https://raw.githubusercontent.com/QYKing233/lede-orangepi-zero3/main/files/bg1.jpg
 popd
 
 
@@ -193,7 +195,7 @@ sed -i 's/\/bin\/ash/\/usr\/bin\/zsh/g' package/base-files/files/etc/passwd
 # 调整 banner
 pushd package/base-files/files/etc
 rm -rf ./banner
-wget https://raw.githubusercontent.com/QYKing233/YLYQ_X86/main/data/banner
+wget https://raw.githubusercontent.com/QYKing233/lede-orangepi-zero3/main/files/banner
 popd
 
 
@@ -206,7 +208,7 @@ git clone https://github.com/robbyrussell/oh-my-zsh ./.oh-my-zsh
 git clone https://github.com/zsh-users/zsh-autosuggestions ./.oh-my-zsh/custom/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ./.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-completions ./.oh-my-zsh/custom/plugins/zsh-completions
-wget https://raw.githubusercontent.com/QYKing233/YLYQ_X86/main/data/.zshrc
+wget https://raw.githubusercontent.com/QYKing233/lede-orangepi-zero3/main/files/.zshrc
 popd
 
 
