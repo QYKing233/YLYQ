@@ -143,7 +143,7 @@ rm -rf feeds/luci/applications/luci-app-argon-config
 
 
 # 为 luci-app-Alist 调整 golang 版本
-sudo apt-get install libfuse-dev
+sudo apt-get install libfuse-dev && y
 rm -rf ./feeds/packages/lang/golang
 git clone https://github.com/sbwml/packages_lang_golang -b 22.x feeds/packages/lang/golang
 
