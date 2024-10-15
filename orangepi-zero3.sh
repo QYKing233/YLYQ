@@ -165,7 +165,6 @@ mv ./gcc/devel/gcc ./feeds/packages/devel
 rm -rf ./gcc
 
 
-
 # 调整主题为黑暗模式
 sed -i 's/normal/dark/g' ./package/community/luci-app-argon-config/root/etc/config/argon
 
@@ -293,3 +292,4 @@ mv ./lede-orangepi-zero3/setuptools-scm.txt ./feeds/packages/lang/python/host-pi
 # 添加  king patch
 cp ./lede-orangepi-zero3/patch/* ./target/linux/sunxi/patches-6.1/
 cp ./lede-orangepi-zero3/patch/* ./target/linux/sunxi/patches-6.6/
+
