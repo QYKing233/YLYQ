@@ -146,7 +146,7 @@ rm -rf feeds/luci/applications/luci-app-argon-config
 
 
 # 为 luci-app-Alist 调整 golang 版本
-sudo apt-get install libfuse-dev && y
+sudo apt install libfuse-dev
 # rm -rf ./feeds/packages/lang/golang
 # git clone https://github.com/sbwml/packages_lang_golang -b 22.x feeds/packages/lang/golang
 
@@ -287,7 +287,7 @@ popd
 
 # 修复 python3 编译失败
 rm -rf ./feeds/packages/lang/python/host-pip-requirements/setuptools-scm.txt
-mv ./setuptools-scm.txt ./feeds/packages/lang/python/host-pip-requirements/
+mv ./lede-orangepi-zero3/setuptools-scm.txt ./feeds/packages/lang/python/host-pip-requirements/
 
 
 # 添加  king patch
