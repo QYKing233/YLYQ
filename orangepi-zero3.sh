@@ -165,7 +165,6 @@ mv ./gcc/devel/gcc ./feeds/packages/devel
 rm -rf ./gcc
 
 
-
 # 调整主题为黑暗模式
 sed -i 's/normal/dark/g' ./package/community/luci-app-argon-config/root/etc/config/argon
 
