@@ -40,7 +40,7 @@ jobs:
       uses: actions/checkout@main
 
 
-        - name: Cache OpenWrt build dependencies (dl, build_dir, bin)
+    - name: Cache OpenWrt build dependencies (dl, build_dir, bin)
       uses: actions/cache@v2
       with:
         path: |
