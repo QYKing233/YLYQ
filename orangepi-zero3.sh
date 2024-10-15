@@ -286,7 +286,7 @@ popd
 
 # 修复 python3 编译失败
 rm -rf ./feeds/packages/lang/python/host-pip-requirements/setuptools-scm.txt
-mv ./setuptools-scm.txt ./feeds/packages/lang/python/host-pip-requirements/
+mv ./lede-orangepi-zero3/setuptools-scm.txt ./feeds/packages/lang/python/host-pip-requirements/
 
 
 # 添加  king patch
