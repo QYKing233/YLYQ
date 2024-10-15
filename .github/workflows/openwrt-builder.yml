@@ -38,6 +38,17 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@main
+
+
+    - name: Cache OpenWrt dependencies
+      uses: actions/cache@v3
+      with:
+        path: |
+          /workdir/lede/dl
+          /workdir/lede/build_dir
+        key: ${{ runner.os }}-lede-${{ hashFiles('lede/.config') }}
+        restore-keys: |
+          ${{ runner.os }}-lede-
       
 
     - name: Check Server Performance
@@ -99,18 +110,7 @@ jobs:
         make download -j8
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
-        
 
-    - name: Cache OpenWrt build dependencies (dl, build_dir, bin)
-      uses: actions/cache@v2
-      with:
-        path: |
-          dl
-          build_dir
-          bin
-        key: ${{ runner.os }}-openwrt-${{ hashFiles('**/.config') }}
-        restore-keys: |
-          ${{ runner.os }}-openwrt-
 
     - name: Compile the firmware
       id: compile
