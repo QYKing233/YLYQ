@@ -292,3 +292,4 @@ mv ./setuptools-scm.txt ./feeds/packages/lang/python/host-pip-requirements/
 # 添加  king patch
 cp ./lede-orangepi-zero3/patch/* ./target/linux/sunxi/patches-6.1/
 cp ./lede-orangepi-zero3/patch/* ./target/linux/sunxi/patches-6.6/
+
