@@ -30,25 +30,10 @@ env:
 jobs:
   build:
     runs-on: ubuntu-22.04
-    strategy:
-      matrix:
-        include:
-          - runner: 'ubuntu-large'
 
     steps:
     - name: Checkout
       uses: actions/checkout@main
-
-
-    - name: Cache OpenWrt dependencies
-      uses: actions/cache@v3
-      with:
-        path: |
-          /workdir/lede/dl
-          /workdir/lede/build_dir
-        key: ${{ runner.os }}-lede-${{ hashFiles('lede/.config') }}
-        restore-keys: |
-          ${{ runner.os }}-lede-
       
 
     - name: Check Server Performance
