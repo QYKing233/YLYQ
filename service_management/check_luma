@@ -11,6 +11,6 @@ start() {
       then
         python /etc/oled/check_luma.py
       fi
-    done &
+    done
 
 }
