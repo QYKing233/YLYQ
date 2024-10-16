@@ -10,6 +10,7 @@ start() {
       if ! pgrep -f "check_luma.py" > /dev/null
       then
         python /etc/oled/check_luma.py
+        sleep 3
       fi
     done
 
