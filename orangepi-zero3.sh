@@ -10,7 +10,7 @@ pushd package/community
 
 
 # 添加 luci-app-alist
-git clone --depth=1 https://github.com/sbwml/luci-app-alist.git
+git clone -b lua --depth=1 https://github.com/sbwml/luci-app-alist.git
 
 
 # 添加 luci-app-passwall
@@ -85,13 +85,19 @@ mv ./small-package/luci-app-poweroff ../community
 rm -rf ./*
 
 
-# 添加 luci-app-irqbalance
+# 添加 luci-app-irqbalance 
 git clone --depth=1 https://github.com/QiuSimons/OpenWrt-Add.git
 mv ./OpenWrt-Add/luci-app-irqbalance ../community
 rm -rf ./*
 
 
 # 退出 repo 目录
+popd
+
+
+# 调整 luci-app-irqbalance 翻译文件
+pushd ./package/community/luci-app-irqbalance/po
+ln -s zh_Hans zh-cn
 popd
 
 
@@ -105,6 +111,12 @@ sed -i 's/services/nas/g' ./package/community/luci-app-filebrowser/luasrc/model/
 sed -i 's/services/nas/g' ./feeds/luci/applications/luci-app-aliyundrive-fuse/luasrc/controller/*.lua
 sed -i 's/services/nas/g' ./feeds/luci/applications/luci-app-aliyundrive-fuse/luasrc/view/aliyundrive-fuse/*.htm
 sed -i 's/services/nas/g' ./feeds/luci/applications/luci-app-aliyundrive-fuse/luasrc/model/cbi/aliyundrive-fuse/*.lua
+
+
+# 调整 luci-app-aliyundrive-webdav到 NAS 菜单
+sed -i 's/services/nas/g' ./feeds/luci/applications/luci-app-aliyundrive-webdav/luasrc/controller/*.lua
+sed -i 's/services/nas/g' ./feeds/luci/applications/luci-app-aliyundrive-webdav/luasrc/view/aliyundrive-webdav/*.htm
+sed -i 's/services/nas/g' ./feeds/luci/applications/luci-app-aliyundrive-webdav/luasrc/model/cbi/aliyundrive-webdav/*.lua
 
 
 # 调整 luci-app-gost 到 VPN 菜单
