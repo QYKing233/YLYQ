@@ -3,6 +3,7 @@
 START=99
 
 start() {
+
   echo "Check luma.oled"
   for i in $(seq 1 3)
   do
@@ -11,4 +12,5 @@ start() {
       python /etc/oled/check_luma.py
     fi
   done
+  
 }
