@@ -3,14 +3,12 @@
 START=99
 
 start() {
-
-    echo "Check luma.oled"
-    for i in $(seq 1 3)
-    do
-      if ! pgrep -f "check_luma.py" > /dev/null
-      then
-        python /etc/oled/check_luma.py &
-        wait
-      fi
-    done
+  echo "Check luma.oled"
+  for i in $(seq 1 3)
+  do
+    if ! pgrep -f "check_luma.py" > /dev/null
+    then
+      python /etc/oled/check_luma.py
+    fi
+  done
 }
