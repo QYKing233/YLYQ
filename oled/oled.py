@@ -76,8 +76,7 @@ if __name__ == '__main__':
     with canvas(device) as draw:
         draw.bitmap((0, 0), boot_image, fill=255)
     device.show()
-    time.sleep(10)
-    device.clear()
+    time.sleep(5)
     while True:
         show_time = time.localtime().tm_hour
         if 6 <= show_time <= 23:
