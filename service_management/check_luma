@@ -9,8 +9,8 @@ start() {
     do
       if ! pgrep -f "check_luma.py" > /dev/null
       then
-        python /etc/oled/check_luma.py
+        python /etc/oled/check_luma.py &
+        wait
       fi
     done
-
 }

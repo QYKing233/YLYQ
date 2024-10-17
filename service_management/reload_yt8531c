@@ -22,7 +22,5 @@ start() {
             ethtool -s eth0 autoneg on
             sleep 3
         fi
-    
     done
-    
 }
