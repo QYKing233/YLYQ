@@ -31,6 +31,7 @@ def cpu_temperature():
     with open("/sys/class/thermal/thermal_zone0/temp") as f:
         return float(f.read()) / 1000
 
+
 def freq():
     result = psutil.cpu_freq().current
     return int(result)
@@ -68,9 +69,15 @@ if __name__ == '__main__':
     device = sh1106(serial_interface)
     font = ImageFont.truetype("/etc/oled/Anonymous.ttf", 12)
     logo_image = Image.open("/etc/oled/logo.png").resize((device.width, device.height))
+    boot_image = Image.open("/etc/oled/boot.png").resize((device.width, device.height))
     device.clear()
     device.contrast(50)
     value = 0
+    with canvas(device) as draw:
+        draw.bitmap((0, 0), boot_image, fill=255)
+    device.show()
+    time.sleep(10)
+    device.clear()
     while True:
         show_time = time.localtime().tm_hour
         if 6 <= show_time <= 23:
