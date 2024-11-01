@@ -1,6 +1,26 @@
 #!/bin/bash
 
 
+
+
+# 为 Alist daed 安装某些软件包
+sudo apt install libfuse-dev
+sudo apt install llvm
+sudo apt install libbpf-dev
+
+
+# 更改 luci 版本
+patch -p1 < ./patch/change-luci-18.06.patch
+
+
+# 添加 luci-app-daed
+git clone --depth=1 https://github.com/QiuSimons/luci-app-daed.git ./package/dae
+# 调整 luci-app-daed 翻译文件
+pushd ./package/dae/luci-app-daed/luci-app-daed/po
+ln -s zh_Hans zh-cn
+popd
+
+
 # 创建 community 目录
 mkdir -p package/community
 
@@ -37,10 +57,6 @@ git clone -b 18.06 --depth=1 https://github.com/xiaozhuai/luci-app-filebrowser.g
 
 # 添加 luci-app-ddnsgo
 git clone --depth=1 https://github.com/sirpdboy/luci-app-ddns-go.git
-
-
-# 添加 luci-app-daed
-git clone --depth=1 https://github.com/QiuSimons/luci-app-daed.git
 
 
 # 退出 community 目录
@@ -104,12 +120,6 @@ ln -s zh_Hans zh-cn
 popd
 
 
-# 调整 luci-app-daed 翻译文件
-pushd ./package/dae/luci-app-daed/luci-app-daed/po
-ln -s zh_Hans zh-cn
-popd
-
-
 # 调整 luci-app-filebrowser 到 NAS 菜单
 sed -i 's/services/nas/g' ./package/community/luci-app-filebrowser/luasrc/controller/*.lua
 sed -i 's/services/nas/g' ./package/community/luci-app-filebrowser/luasrc/view/filebrowser/*.htm
@@ -123,9 +133,9 @@ sed -i 's/services/nas/g' ./package/community/luci-app-filebrowser/luasrc/model/
 
 
 # 调整 luci-app-aliyundrive-webdav到 NAS 菜单
-sed -i 's/services/nas/g' ./feeds/luci/applications/luci-app-aliyundrive-webdav/luasrc/controller/*.lua
-sed -i 's/services/nas/g' ./feeds/luci/applications/luci-app-aliyundrive-webdav/luasrc/view/aliyundrive-webdav/*.htm
-sed -i 's/services/nas/g' ./feeds/luci/applications/luci-app-aliyundrive-webdav/luasrc/model/cbi/aliyundrive-webdav/*.lua
+# sed -i 's/services/nas/g' ./feeds/luci/applications/luci-app-aliyundrive-webdav/luasrc/controller/*.lua
+# sed -i 's/services/nas/g' ./feeds/luci/applications/luci-app-aliyundrive-webdav/luasrc/view/aliyundrive-webdav/*.htm
+# sed -i 's/services/nas/g' ./feeds/luci/applications/luci-app-aliyundrive-webdav/luasrc/model/cbi/aliyundrive-webdav/*.lua
 
 
 # 调整 luci-app-v2ray-server 到 VPN 菜单
@@ -158,12 +168,6 @@ sed -i 's/..\/..\/luci.mk/$(TOPDIR)\/feeds\/luci\/luci.mk/g' ./package/community
 # 删除默认 luci-theme-argon & luci-app-argon-config 插件
 rm -rf feeds/luci/themes/luci-theme-argon 
 rm -rf feeds/luci/applications/luci-app-argon-config
-
-
-# 为 Alist daed 安装某些软件包
-sudo apt install libfuse-dev
-sudo apt install llvm
-sudo apt install libbpf-dev
 
 
 # 调整 luci-theme-argon 的背景图片 
