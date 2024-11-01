@@ -39,6 +39,10 @@ git clone -b 18.06 --depth=1 https://github.com/xiaozhuai/luci-app-filebrowser.g
 git clone --depth=1 https://github.com/sirpdboy/luci-app-ddns-go.git
 
 
+# 添加 luci-app-daed
+git clone --depth=1 https://github.com/QiuSimons/luci-app-daed.git
+
+
 # 退出 community 目录
 popd
 
@@ -75,13 +79,12 @@ mv ./luci/applications/luci-app-syncthing ../community
 rm -rf ./*
 
 
-# 添加 luci-app-beardropper & luci-app-gost & luci-app-onliner & luci-app-poweroff
+# 添加 luci-app-beardropper & luci-app-onliner & luci-app-poweroff
 git clone --depth=1 https://github.com/kenzok8/small-package.git
-# mv ./small-package/luci-app-gost ../community
-# mv ./small-package/gost ../community
 mv ./small-package/luci-app-beardropper ../community
 mv ./small-package/luci-app-onliner ../community
 mv ./small-package/luci-app-poweroff ../community
+mv ./small-package/libcron ../community
 rm -rf ./*
 
 
@@ -101,6 +104,12 @@ ln -s zh_Hans zh-cn
 popd
 
 
+# 调整 luci-app-daed 翻译文件
+pushd ./package/dae/luci-app-daed/luci-app-daed/po
+ln -s zh_Hans zh-cn
+popd
+
+
 # 调整 luci-app-filebrowser 到 NAS 菜单
 sed -i 's/services/nas/g' ./package/community/luci-app-filebrowser/luasrc/controller/*.lua
 sed -i 's/services/nas/g' ./package/community/luci-app-filebrowser/luasrc/view/filebrowser/*.htm
@@ -108,21 +117,15 @@ sed -i 's/services/nas/g' ./package/community/luci-app-filebrowser/luasrc/model/
 
 
 # 调整 luci-app-aliyundrive-fuse 到 NAS 菜单
-sed -i 's/services/nas/g' ./feeds/luci/applications/luci-app-aliyundrive-fuse/luasrc/controller/*.lua
-sed -i 's/services/nas/g' ./feeds/luci/applications/luci-app-aliyundrive-fuse/luasrc/view/aliyundrive-fuse/*.htm
-sed -i 's/services/nas/g' ./feeds/luci/applications/luci-app-aliyundrive-fuse/luasrc/model/cbi/aliyundrive-fuse/*.lua
+# sed -i 's/services/nas/g' ./feeds/luci/applications/luci-app-aliyundrive-fuse/luasrc/controller/*.lua
+# sed -i 's/services/nas/g' ./feeds/luci/applications/luci-app-aliyundrive-fuse/luasrc/view/aliyundrive-fuse/*.htm
+# sed -i 's/services/nas/g' ./feeds/luci/applications/luci-app-aliyundrive-fuse/luasrc/model/cbi/aliyundrive-fuse/*.lua
 
 
 # 调整 luci-app-aliyundrive-webdav到 NAS 菜单
 sed -i 's/services/nas/g' ./feeds/luci/applications/luci-app-aliyundrive-webdav/luasrc/controller/*.lua
 sed -i 's/services/nas/g' ./feeds/luci/applications/luci-app-aliyundrive-webdav/luasrc/view/aliyundrive-webdav/*.htm
 sed -i 's/services/nas/g' ./feeds/luci/applications/luci-app-aliyundrive-webdav/luasrc/model/cbi/aliyundrive-webdav/*.lua
-
-
-# 调整 luci-app-gost 到 VPN 菜单
-# sed -i 's/services/vpn/g' ./package/community/luci-app-gost/luasrc/controller/*.lua
-# sed -i 's/services/vpn/g' ./package/community/luci-app-gost/luasrc/model/cbi/*.lua
-# sed -i 's/services/vpn/g' ./package/community/luci-app-gost/luasrc/view/gost/*.htm
 
 
 # 调整 luci-app-v2ray-server 到 VPN 菜单
@@ -157,10 +160,10 @@ rm -rf feeds/luci/themes/luci-theme-argon
 rm -rf feeds/luci/applications/luci-app-argon-config
 
 
-# 为 luci-app-Alist 调整 golang 版本
+# 为 Alist daed 安装某些软件包
 sudo apt install libfuse-dev
-# rm -rf ./feeds/packages/lang/golang
-# git clone https://github.com/sbwml/packages_lang_golang -b 22.x feeds/packages/lang/golang
+sudo apt install llvm
+sudo apt install libbpf-dev
 
 
 # 调整 luci-theme-argon 的背景图片 
@@ -191,8 +194,8 @@ sed -i 's/os.date()/os.date("%a %Y-%m-%d %H:%M:%S")/g' package/lean/autocore/fil
 
 
 # 添加编译日期
-date_version=$(date +"%Y-%m-%d")
-sed -i "56 s/OpenWrt/OpenWrt ($date_version) Build_By : YLYQ/g" ./package/lean/default-settings/files/zzz-default-settings
+# date_version=$(date +"%Y-%m-%d")
+# sed -i "56 s/OpenWrt/OpenWrt ($date_version) Build_By : YLYQ/g" ./package/lean/default-settings/files/zzz-default-settings
 
 
 # 调整默认 shell 为 zsh
@@ -223,85 +226,5 @@ wget https://raw.githubusercontent.com/QYKing233/lede-orangepi-zero3/main/files/
 popd
 
 
-# 克隆 lede-orangepi-zero3
-git clone https://github.com/QYKing233/lede-orangepi-zero3.git
-mkdir -p ./target/linux/sunxi/base-files/etc/oled
-mkdir -p ./target/linux/sunxi/base-files/etc/init.d
-mkdir -p ./target/linux/sunxi/base-files/etc/rc.d
-mkdir -p ./target/linux/sunxi/base-files/usr/bin
-
-
-# 添加 oled files
-mv ./lede-orangepi-zero3/oled/* ./target/linux/sunxi/base-files/etc/oled/
-pushd  ./target/linux/sunxi/base-files/etc/oled/
-chmod 0755 ./*
-popd
-
-
-# 添加 gpio_fan shell scripts
-mv ./lede-orangepi-zero3/shell_scripts/gpio_fan.sh ./target/linux/sunxi/base-files/usr/bin/
-pushd  ./target/linux/sunxi/base-files/usr/bin/
-chmod 0755 ./gpio_fan.sh
-popd
-
-
-# 添加 oled service_management
-mv ./lede-orangepi-zero3/service_management/oled ./target/linux/sunxi/base-files/etc/init.d/
-mv ./lede-orangepi-zero3/service_management/check_luma ./target/linux/sunxi/base-files/etc/init.d/
-pushd  ./target/linux/sunxi/base-files/etc/init.d/
-chmod 0755 ./oled
-chmod 0755 ./check_luma
-popd
-
-
-# 添加 reload_yt8531c service_management
-mv ./lede-orangepi-zero3/service_management/reload_yt8531c ./target/linux/sunxi/base-files/etc/init.d/
-pushd  ./target/linux/sunxi/base-files/etc/init.d/
-chmod 0755 ./reload_yt8531c
-popd
-
-
-# 添加 gpio_fan service_management
-mv ./lede-orangepi-zero3/service_management/gpio_fan ./target/linux/sunxi/base-files/etc/init.d/
-pushd  ./target/linux/sunxi/base-files/etc/init.d/
-chmod 0755 ./gpio_fan
-popd
-
-
-# 添加 reload_yt8531c service_management_start
-mv ./lede-orangepi-zero3/service_management_start/S99reload_yt8531c ./target/linux/sunxi/base-files/etc/rc.d/
-pushd  ./target/linux/sunxi/base-files/etc/rc.d/
-chmod 0755 ./S99reload_yt8531c
-popd
-
-
-# 添加 gpio_fan service_management_start
-mv ./lede-orangepi-zero3/service_management_start/S21gpio_fan ./target/linux/sunxi/base-files/etc/rc.d/
-pushd  ./target/linux/sunxi/base-files/etc/rc.d/
-chmod 0755 ./S21gpio_fan
-popd
-
-
-# 添加 check_luma service_management_start
-mv ./lede-orangepi-zero3/service_management_start/S99check_luma ./target/linux/sunxi/base-files/etc/rc.d/
-pushd  ./target/linux/sunxi/base-files/etc/rc.d/
-chmod 0755 ./S99check_luma
-popd
-
-
-# 添加 oled service_management_start
-mv ./lede-orangepi-zero3/service_management_start/S99oled ./target/linux/sunxi/base-files/etc/rc.d/
-pushd  ./target/linux/sunxi/base-files/etc/rc.d/
-chmod 0755 ./S99oled
-popd
-
-
 # 修复 python3 编译失败
-rm -rf ./feeds/packages/lang/python/host-pip-requirements/setuptools-scm.txt
-mv ./lede-orangepi-zero3/setuptools-scm.txt ./feeds/packages/lang/python/host-pip-requirements/
-
-
-# 添加  king patch
-cp ./lede-orangepi-zero3/patch/* ./target/linux/sunxi/patches-6.1/
-cp ./lede-orangepi-zero3/patch/* ./target/linux/sunxi/patches-6.6/
-
+patch -p1 < ./patch/change-setuptools-scm.patch
