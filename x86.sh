@@ -13,10 +13,14 @@ sudo apt install libbpf-dev
 patch -p1 < ./patch/change-luci-18.06.patch
 
 
+# 添加 lede luci 软件包
+./scripts/feeds update -a && ./scripts/feeds install -a
+
+
 # 添加 luci-app-daed
 git clone --depth=1 https://github.com/QiuSimons/luci-app-daed.git ./package/dae
 # 调整 luci-app-daed 翻译文件
-pushd ./package/dae/luci-app-daed/luci-app-daed/po
+pushd ./package/dae/luci-app-daed/po
 ln -s zh_Hans zh-cn
 popd
 
