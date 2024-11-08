@@ -1,6 +1,31 @@
 #!/bin/bash
 
 
+# 为 Alist daed 安装某些软件包
+# sudo apt install libfuse-dev
+# sudo apt install llvm
+# sudo apt install libbpf-dev
+
+
+# 更改 luci 版本
+patch -p1 < ./patch/change-luci-18.06.patch
+
+
+# 添加 lede luci 软件包
+./scripts/feeds update -a && ./scripts/feeds install -a
+
+
+# 添加 luci-app-daed
+git clone --depth=1 https://github.com/QiuSimons/luci-app-daed.git ./package/dae
+# 调整 luci-app-daed 翻译文件
+pushd ./package/dae/luci-app-daed/po
+ln -s zh_Hans zh-cn
+popd
+# 删除 lede 的 dae daed
+rm -rf ./feeds/packages/net/dae
+rm -rf ./feeds/packages/net/daed
+
+
 # 创建 community 目录
 mkdir -p package/community
 
@@ -39,6 +64,10 @@ git clone -b 18.06 --depth=1 https://github.com/xiaozhuai/luci-app-filebrowser.g
 git clone --depth=1 https://github.com/sirpdboy/luci-app-ddns-go.git
 
 
+# 添加 luci-app-nekobox
+git clone -b nekobox --depth=1 https://github.com/Thaolga/openwrt-nekobox.git
+
+
 # 退出 community 目录
 popd
 
@@ -56,13 +85,6 @@ git clone --depth=1 https://github.com/Boos4721/OpenWrt-Packages.git
 mv ./OpenWrt-Packages/luci-app-adguardhome ../community
 
 
-# 添加 luci-app-vssr
-git clone --depth=1 https://github.com/haiibo/openwrt-packages.git
-mv ./openwrt-packages/luci-app-vssr ../community
-mv ./openwrt-packages/lua-maxminddb ../community
-rm -rf ./*
-
-
 # 添加 OpenClash
 git clone --depth=1 https://github.com/vernesong/OpenClash.git
 mv ./OpenClash/luci-app-openclash ../community
@@ -75,10 +97,8 @@ mv ./luci/applications/luci-app-syncthing ../community
 rm -rf ./*
 
 
-# 添加 luci-app-beardropper & luci-app-gost & luci-app-onliner & luci-app-poweroff
+# 添加 luci-app-beardropper & luci-app-onliner & luci-app-poweroff
 git clone --depth=1 https://github.com/kenzok8/small-package.git
-# mv ./small-package/luci-app-gost ../community
-# mv ./small-package/gost ../community
 mv ./small-package/luci-app-beardropper ../community
 mv ./small-package/luci-app-onliner ../community
 mv ./small-package/luci-app-poweroff ../community
@@ -119,12 +139,6 @@ sed -i 's/services/nas/g' ./feeds/luci/applications/luci-app-aliyundrive-webdav/
 sed -i 's/services/nas/g' ./feeds/luci/applications/luci-app-aliyundrive-webdav/luasrc/model/cbi/aliyundrive-webdav/*.lua
 
 
-# 调整 luci-app-gost 到 VPN 菜单
-# sed -i 's/services/vpn/g' ./package/community/luci-app-gost/luasrc/controller/*.lua
-# sed -i 's/services/vpn/g' ./package/community/luci-app-gost/luasrc/model/cbi/*.lua
-# sed -i 's/services/vpn/g' ./package/community/luci-app-gost/luasrc/view/gost/*.htm
-
-
 # 调整 luci-app-v2ray-server 到 VPN 菜单
 sed -i 's/services/vpn/g' ./feeds/luci/applications/luci-app-v2ray-server/luasrc/controller/*.lua
 sed -i 's/services/vpn/g' ./feeds/luci/applications/luci-app-v2ray-server/luasrc/model/cbi/v2ray_server/api/*.lua
@@ -157,12 +171,6 @@ rm -rf feeds/luci/themes/luci-theme-argon
 rm -rf feeds/luci/applications/luci-app-argon-config
 
 
-# 为 luci-app-Alist 调整 golang 版本
-sudo apt install libfuse-dev
-# rm -rf ./feeds/packages/lang/golang
-# git clone https://github.com/sbwml/packages_lang_golang -b 22.x feeds/packages/lang/golang
-
-
 # 调整 luci-theme-argon 的背景图片 
 pushd package/community/luci-theme-argon/htdocs/luci-static/argon/img
 rm -rf ./bg1.jpg
@@ -192,7 +200,7 @@ sed -i 's/os.date()/os.date("%a %Y-%m-%d %H:%M:%S")/g' package/lean/autocore/fil
 
 # 添加编译日期
 date_version=$(date +"%Y-%m-%d")
-sed -i "56 s/OpenWrt/OpenWrt ($date_version) Build_By : YLYQ/g" ./package/lean/default-settings/files/zzz-default-settings
+sed -i "56 s/LEDE/LEDE ($date_version) Build_By : YLYQ/g" ./package/lean/default-settings/files/zzz-default-settings
 
 
 # 调整默认 shell 为 zsh
@@ -290,20 +298,26 @@ popd
 
 
 # 添加 oled service_management_start
-mv ./lede-orangepi-zero3/service_management_start/S99oled ./target/linux/sunxi/base-files/etc/rc.d/
+mv ./lede-orangepi-zero3/service_management_start/S30oled ./target/linux/sunxi/base-files/etc/rc.d/
 pushd  ./target/linux/sunxi/base-files/etc/rc.d/
-chmod 0755 ./S99oled
+chmod 0755 ./S30oled
 popd
 
 
 # 修复 python3 编译失败
-rm -rf ./feeds/packages/lang/python/host-pip-requirements/setuptools-scm.txt
-mv ./lede-orangepi-zero3/setuptools-scm.txt ./feeds/packages/lang/python/host-pip-requirements/
+patch -p1 < ./patch/change-setuptools-scm.patch
 
 
-# 添加  king patch
-cp ./lede-orangepi-zero3/patch/* ./target/linux/sunxi/patches-6.1/
-cp ./lede-orangepi-zero3/patch/* ./target/linux/sunxi/patches-6.6/
+# 添加  orangepi-zero3 patch
+cp ./lede-orangepi-zero3/patch/king-arm64-dts-orangepi-zero-enable-i2c-1.patch ./target/linux/sunxi/patches-6.1/
+cp ./lede-orangepi-zero3/patch/king-fix-yt8531C-phy-1.patch ./target/linux/sunxi/patches-6.1/
+cp ./lede-orangepi-zero3/patch/king-fix-yt8531C-phy-2.patch ./target/linux/sunxi/patches-6.1/
+cp ./lede-orangepi-zero3/patch/king-fix-yt8531C-phy-3.patch ./target/linux/sunxi/patches-6.1/
 
 
-
+# 添加 orangepi-zero3 config
+rm -rf ./.config
+mv ./lede-orangepi-zero3/lede-orangepi-zero3.config ./
+mv ./dae.config ./
+cat ./dae.config >> ./lede-orangepi-zero3.config
+mv ./lede-orangepi-zero3.config ./.config
