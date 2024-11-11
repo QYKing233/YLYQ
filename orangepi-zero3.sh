@@ -7,6 +7,11 @@
 # sudo apt install libbpf-dev
 
 
+# 克隆 lede-orangepi-zero3 & 移动 patch 目录到  lede 目录
+git clone --depth=1 https://github.com/QYKing233/lede-orangepi-zero3.git
+mv ./lede-orangepi-zero3/patch ./
+
+
 # 更改 luci 版本
 patch -p1 < ./patch/change-luci-18.06.patch
 
@@ -64,10 +69,6 @@ git clone -b 18.06 --depth=1 https://github.com/xiaozhuai/luci-app-filebrowser.g
 git clone --depth=1 https://github.com/sirpdboy/luci-app-ddns-go.git
 
 
-# 添加 luci-app-nekobox
-git clone -b nekobox --depth=1 https://github.com/Thaolga/openwrt-nekobox.git
-
-
 # 退出 community 目录
 popd
 
@@ -102,6 +103,7 @@ git clone --depth=1 https://github.com/kenzok8/small-package.git
 mv ./small-package/luci-app-beardropper ../community
 mv ./small-package/luci-app-onliner ../community
 mv ./small-package/luci-app-poweroff ../community
+mv ./small-package/libcron ../community
 rm -rf ./*
 
 
@@ -231,8 +233,7 @@ wget https://raw.githubusercontent.com/QYKing233/lede-orangepi-zero3/main/files/
 popd
 
 
-# 克隆 lede-orangepi-zero3
-git clone https://github.com/QYKing233/lede-orangepi-zero3.git
+# 创建自定义脚本目录
 mkdir -p ./target/linux/sunxi/base-files/etc/oled
 mkdir -p ./target/linux/sunxi/base-files/etc/init.d
 mkdir -p ./target/linux/sunxi/base-files/etc/rc.d
@@ -309,15 +310,19 @@ patch -p1 < ./patch/change-setuptools-scm.patch
 
 
 # 添加  orangepi-zero3 patch
-cp ./lede-orangepi-zero3/patch/king-arm64-dts-orangepi-zero-enable-i2c-1.patch ./target/linux/sunxi/patches-6.1/
-cp ./lede-orangepi-zero3/patch/king-fix-yt8531C-phy-1.patch ./target/linux/sunxi/patches-6.1/
-cp ./lede-orangepi-zero3/patch/king-fix-yt8531C-phy-2.patch ./target/linux/sunxi/patches-6.1/
-cp ./lede-orangepi-zero3/patch/king-fix-yt8531C-phy-3.patch ./target/linux/sunxi/patches-6.1/
+cp ./patch/king-arm64-dts-orangepi-zero-enable-i2c-1.patch ./target/linux/sunxi/patches-6.1/
+cp ./patch/king-fix-yt8531C-phy-1.patch ./target/linux/sunxi/patches-6.1/
+cp ./patch/king-fix-yt8531C-phy-2.patch ./target/linux/sunxi/patches-6.1/
+cp ./patch/king-fix-yt8531C-phy-3.patch ./target/linux/sunxi/patches-6.1/
 
 
 # 添加 orangepi-zero3 config
 rm -rf ./.config
-mv ./lede-orangepi-zero3/lede-orangepi-zero3.config ./
-mv ./dae.config ./
-cat ./dae.config >> ./lede-orangepi-zero3.config
-mv ./lede-orangepi-zero3.config ./.config
+mv ./lede-orangepi-zero3/orangepi-zero3.config ./
+mv ./lede-orangepi-zero3/dae.config ./
+cat ./dae.config >> ./orangepi-zero3.config
+mv ./orangepi-zero3.config ./.config
+
+
+# 删除 lede-orangepi-zero3
+rm -rf ./lede-orangepi-zero3
