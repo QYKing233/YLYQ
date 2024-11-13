@@ -145,12 +145,6 @@ sed -i 's/services/vpn/g' ./feeds/luci/applications/luci-app-v2ray-server/luasrc
 sed -i 's/services/vpn/g' ./feeds/luci/applications/luci-app-v2ray-server/luasrc/view/v2ray_server/*.htm
 
 
-# 调整 luci-app-nft-qos 到 网络 菜单
-sed -i 's/services/network/g' ./feeds/luci/applications/luci-app-nft-qos/luasrc/controller/*.lua
-sed -i 's/services/network/g' ./feeds/luci/applications/luci-app-nft-qos/luasrc/model/cbi/nft-qos/*.lua
-sed -i 's/services/network/g' ./feeds/luci/applications/luci-app-nft-qos/luasrc/view/nft-qos/*.htm
-
-
 # 调整 Nps 内网穿透 服务器地址数据类型为 string
 sed -i 's/ipaddr/string/g' ./feeds/luci/applications/luci-app-nps/luasrc/model/cbi/nps.lua
 sed -i '/Must an IPv4 address/d' ./feeds/luci/applications/luci-app-nps/luasrc/model/cbi/nps.lua
