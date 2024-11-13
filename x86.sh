@@ -1,8 +1,6 @@
 #!/bin/bash
 
 
-
-
 # 为 Alist daed 安装某些软件包
 sudo apt install libfuse-dev
 sudo apt install llvm
@@ -15,7 +13,7 @@ mv ./YLYQ/patch ./
 
 
 # 更改 luci 版本
-patch -p1 < ./patch/gernel-change-luci-18.06.patch
+patch -p1 < ./patch/general-change-luci-18.06.patch
 
 
 # 添加 lede luci 软件包
@@ -233,7 +231,7 @@ popd
 
 
 # 修复 python3 编译失败
-patch -p1 < ./patch/-gernel-change-setuptools-scm.patch
+patch -p1 < ./patch/general-change-setuptools-scm.patch
 
 
 # 添加 x86.config
