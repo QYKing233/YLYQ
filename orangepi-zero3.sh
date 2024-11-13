@@ -319,8 +319,8 @@ cp ./patch/orangepi-fix-yt8531C-phy-3.patch ./target/linux/sunxi/patches-6.1/
 # 添加 orangepi-zero3 config
 rm -rf ./.config
 mv ./YLYQ/orangepi-zero3.config ./
-mv ./YLYQ/dae.config ./
-cat ./dae.config >> ./orangepi-zero3.config
+# mv ./YLYQ/dae.config ./
+# cat ./dae.config >> ./orangepi-zero3.config
 mv ./orangepi-zero3.config ./.config
 
 

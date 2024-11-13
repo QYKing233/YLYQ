@@ -239,8 +239,8 @@ patch -p1 < ./patch/-gernel-change-setuptools-scm.patch
 # 添加 x86.config
 rm -rf ./.config
 mv ./YLYQ/x86.config ./
-mv ./YLYQ/dae.config ./
-cat ./dae.config >> ./x86.config
+# mv ./YLYQ/dae.config ./
+# cat ./dae.config >> ./x86.config
 mv ./x86.config ./.config
 
 
