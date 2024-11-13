@@ -1,4 +1,4 @@
-# 主菜单
+# 插件列表
 
 <details>
   <summary>📁 状态</summary>
