@@ -9,8 +9,13 @@ sudo apt install llvm
 sudo apt install libbpf-dev
 
 
+# 克隆 YLYQ & 移动 patch 目录到  lede 目录
+git clone --depth=1 https://github.com/QYKing233/YLYQ.git
+mv ./YLYQ/patch ./
+
+
 # 更改 luci 版本
-patch -p1 < ./patch/change-luci-18.06.patch
+patch -p1 < ./patch/gernel-change-luci-18.06.patch
 
 
 # 添加 lede luci 软件包
@@ -78,13 +83,6 @@ pushd ./package/repo
 # 添加 luci-app-adguardhome
 git clone --depth=1 https://github.com/Boos4721/OpenWrt-Packages.git
 mv ./OpenWrt-Packages/luci-app-adguardhome ../community
-
-
-# 添加 luci-app-vssr
-git clone --depth=1 https://github.com/haiibo/openwrt-packages.git
-mv ./openwrt-packages/luci-app-vssr ../community
-mv ./openwrt-packages/lua-maxminddb ../community
-rm -rf ./*
 
 
 # 添加 OpenClash
@@ -177,7 +175,7 @@ rm -rf feeds/luci/applications/luci-app-argon-config
 # 调整 luci-theme-argon 的背景图片 
 pushd package/community/luci-theme-argon/htdocs/luci-static/argon/img
 rm -rf ./bg1.jpg
-wget https://raw.githubusercontent.com/QYKing233/lede-orangepi-zero3/main/files/bg1.jpg
+wget https://raw.githubusercontent.com/QYKing233/YLYQ/main/files/bg1.jpg
 popd
 
 
@@ -202,8 +200,8 @@ sed -i 's/os.date()/os.date("%a %Y-%m-%d %H:%M:%S")/g' package/lean/autocore/fil
 
 
 # 添加编译日期
-# date_version=$(date +"%Y-%m-%d")
-# sed -i "56 s/OpenWrt/OpenWrt ($date_version) Build_By : YLYQ/g" ./package/lean/default-settings/files/zzz-default-settings
+date_version=$(date +"%Y-%m-%d")
+sed -i "56 s/LEDE/LEDE ($date_version) Build_By : YLYQ/g" ./package/lean/default-settings/files/zzz-default-settings
 
 
 # 调整默认 shell 为 zsh
@@ -217,7 +215,7 @@ sed -i 's/\/bin\/ash/\/usr\/bin\/zsh/g' package/base-files/files/etc/passwd
 # 调整 banner
 pushd package/base-files/files/etc
 rm -rf ./banner
-wget https://raw.githubusercontent.com/QYKing233/lede-orangepi-zero3/main/files/banner
+wget https://raw.githubusercontent.com/QYKing233/YLYQ/main/files/banner
 popd
 
 
@@ -230,9 +228,21 @@ git clone https://github.com/robbyrussell/oh-my-zsh ./.oh-my-zsh
 git clone https://github.com/zsh-users/zsh-autosuggestions ./.oh-my-zsh/custom/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ./.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-completions ./.oh-my-zsh/custom/plugins/zsh-completions
-wget https://raw.githubusercontent.com/QYKing233/lede-orangepi-zero3/main/files/.zshrc
+wget https://raw.githubusercontent.com/QYKing233/YLYQ/main/files/.zshrc
 popd
 
 
 # 修复 python3 编译失败
-patch -p1 < ./patch/change-setuptools-scm.patch
+patch -p1 < ./patch/-gernel-change-setuptools-scm.patch
+
+
+# 添加 x86.config
+rm -rf ./.config
+mv ./YLYQ/x86.config ./
+mv ./YLYQ/dae.config ./
+cat ./dae.config >> ./x86.config
+mv ./x86.config ./.config
+
+
+# 删除 YLYQ
+rm -rf ./YLYQ

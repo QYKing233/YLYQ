@@ -7,13 +7,13 @@
 # sudo apt install libbpf-dev
 
 
-# 克隆 lede-orangepi-zero3 & 移动 patch 目录到  lede 目录
-git clone --depth=1 https://github.com/QYKing233/lede-orangepi-zero3.git
-mv ./lede-orangepi-zero3/patch ./
+# 克隆 YLYQ & 移动 patch 目录到  lede 目录
+git clone --depth=1 https://github.com/QYKing233/YLYQ.git
+mv ./YLYQ/patch ./
 
 
 # 更改 luci 版本
-patch -p1 < ./patch/change-luci-18.06.patch
+patch -p1 < ./patch/gernel-change-luci-18.06.patch
 
 
 # 添加 lede luci 软件包
@@ -176,7 +176,7 @@ rm -rf feeds/luci/applications/luci-app-argon-config
 # 调整 luci-theme-argon 的背景图片 
 pushd package/community/luci-theme-argon/htdocs/luci-static/argon/img
 rm -rf ./bg1.jpg
-wget https://raw.githubusercontent.com/QYKing233/lede-orangepi-zero3/main/files/bg1.jpg
+wget https://raw.githubusercontent.com/QYKing233/YLYQ/main/files/bg1.jpg
 popd
 
 
@@ -216,7 +216,7 @@ sed -i 's/\/bin\/ash/\/usr\/bin\/zsh/g' package/base-files/files/etc/passwd
 # 调整 banner
 pushd package/base-files/files/etc
 rm -rf ./banner
-wget https://raw.githubusercontent.com/QYKing233/lede-orangepi-zero3/main/files/banner
+wget https://raw.githubusercontent.com/QYKing233/YLYQ/main/files/banner
 popd
 
 
@@ -229,7 +229,7 @@ git clone https://github.com/robbyrussell/oh-my-zsh ./.oh-my-zsh
 git clone https://github.com/zsh-users/zsh-autosuggestions ./.oh-my-zsh/custom/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ./.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-completions ./.oh-my-zsh/custom/plugins/zsh-completions
-wget https://raw.githubusercontent.com/QYKing233/lede-orangepi-zero3/main/files/.zshrc
+wget https://raw.githubusercontent.com/QYKing233/YLYQ/main/files/.zshrc
 popd
 
 
@@ -241,22 +241,22 @@ mkdir -p ./target/linux/sunxi/base-files/usr/bin
 
 
 # 添加 oled files
-mv ./lede-orangepi-zero3/oled/* ./target/linux/sunxi/base-files/etc/oled/
+mv ./YLYQ/oled/* ./target/linux/sunxi/base-files/etc/oled/
 pushd  ./target/linux/sunxi/base-files/etc/oled/
 chmod 0755 ./*
 popd
 
 
 # 添加 gpio_fan shell scripts
-mv ./lede-orangepi-zero3/shell_scripts/gpio_fan.sh ./target/linux/sunxi/base-files/usr/bin/
+mv ./YLYQ/shell_scripts/gpio_fan.sh ./target/linux/sunxi/base-files/usr/bin/
 pushd  ./target/linux/sunxi/base-files/usr/bin/
 chmod 0755 ./gpio_fan.sh
 popd
 
 
 # 添加 oled service_management
-mv ./lede-orangepi-zero3/service_management/oled ./target/linux/sunxi/base-files/etc/init.d/
-mv ./lede-orangepi-zero3/service_management/check_luma ./target/linux/sunxi/base-files/etc/init.d/
+mv ./YLYQ/service_management/oled ./target/linux/sunxi/base-files/etc/init.d/
+mv ./YLYQ/service_management/check_luma ./target/linux/sunxi/base-files/etc/init.d/
 pushd  ./target/linux/sunxi/base-files/etc/init.d/
 chmod 0755 ./oled
 chmod 0755 ./check_luma
@@ -264,65 +264,65 @@ popd
 
 
 # 添加 reload_yt8531c service_management
-mv ./lede-orangepi-zero3/service_management/reload_yt8531c ./target/linux/sunxi/base-files/etc/init.d/
+mv ./YLYQ/service_management/reload_yt8531c ./target/linux/sunxi/base-files/etc/init.d/
 pushd  ./target/linux/sunxi/base-files/etc/init.d/
 chmod 0755 ./reload_yt8531c
 popd
 
 
 # 添加 gpio_fan service_management
-mv ./lede-orangepi-zero3/service_management/gpio_fan ./target/linux/sunxi/base-files/etc/init.d/
+mv ./YLYQ/service_management/gpio_fan ./target/linux/sunxi/base-files/etc/init.d/
 pushd  ./target/linux/sunxi/base-files/etc/init.d/
 chmod 0755 ./gpio_fan
 popd
 
 
 # 添加 reload_yt8531c service_management_start
-mv ./lede-orangepi-zero3/service_management_start/S99reload_yt8531c ./target/linux/sunxi/base-files/etc/rc.d/
+mv ./YLYQ/service_management_start/S99reload_yt8531c ./target/linux/sunxi/base-files/etc/rc.d/
 pushd  ./target/linux/sunxi/base-files/etc/rc.d/
 chmod 0755 ./S99reload_yt8531c
 popd
 
 
 # 添加 gpio_fan service_management_start
-mv ./lede-orangepi-zero3/service_management_start/S21gpio_fan ./target/linux/sunxi/base-files/etc/rc.d/
+mv ./YLYQ/service_management_start/S21gpio_fan ./target/linux/sunxi/base-files/etc/rc.d/
 pushd  ./target/linux/sunxi/base-files/etc/rc.d/
 chmod 0755 ./S21gpio_fan
 popd
 
 
 # 添加 check_luma service_management_start
-mv ./lede-orangepi-zero3/service_management_start/S99check_luma ./target/linux/sunxi/base-files/etc/rc.d/
+mv ./YLYQ/service_management_start/S99check_luma ./target/linux/sunxi/base-files/etc/rc.d/
 pushd  ./target/linux/sunxi/base-files/etc/rc.d/
 chmod 0755 ./S99check_luma
 popd
 
 
 # 添加 oled service_management_start
-mv ./lede-orangepi-zero3/service_management_start/S30oled ./target/linux/sunxi/base-files/etc/rc.d/
+mv ./YLYQ/service_management_start/S30oled ./target/linux/sunxi/base-files/etc/rc.d/
 pushd  ./target/linux/sunxi/base-files/etc/rc.d/
 chmod 0755 ./S30oled
 popd
 
 
 # 修复 python3 编译失败
-patch -p1 < ./patch/change-setuptools-scm.patch
+patch -p1 < ./patch/gernel-change-setuptools-scm.patch
 
 
 # 添加  orangepi-zero3 patch
-cp ./patch/king-arm64-dts-orangepi-zero-enable-i2c-1.patch ./target/linux/sunxi/patches-6.1/
-cp ./patch/king-fix-yt8531C-phy-1.patch ./target/linux/sunxi/patches-6.1/
-cp ./patch/king-fix-yt8531C-phy-2.patch ./target/linux/sunxi/patches-6.1/
-cp ./patch/king-fix-yt8531C-phy-3.patch ./target/linux/sunxi/patches-6.1/
+cp ./patch/orangepi-zero3-enable-i2c-1.patch ./target/linux/sunxi/patches-6.1/
+cp ./patch/orangepi-fix-yt8531C-phy-1.patch ./target/linux/sunxi/patches-6.1/
+cp ./patch/orangepi-fix-yt8531C-phy-2.patch ./target/linux/sunxi/patches-6.1/
+cp ./patch/orangepi-fix-yt8531C-phy-3.patch ./target/linux/sunxi/patches-6.1/
 
 
 # 添加 orangepi-zero3 config
 rm -rf ./.config
-mv ./lede-orangepi-zero3/orangepi-zero3.config ./
-mv ./lede-orangepi-zero3/dae.config ./
+mv ./YLYQ/orangepi-zero3.config ./
+mv ./YLYQ/dae.config ./
 cat ./dae.config >> ./orangepi-zero3.config
 mv ./orangepi-zero3.config ./.config
 
 
-# 删除 lede-orangepi-zero3
-rm -rf ./lede-orangepi-zero3
+# 删除 YLYQ
+rm -rf ./YLYQ
