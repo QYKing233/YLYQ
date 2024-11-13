@@ -1,16 +1,25 @@
 # 主菜单
 
 <details>
-  <summary>📁 第一项: 概览</summary>
+  <summary>📁 状态</summary>
   
-  - 简介
-  - 使用指南
-  - 功能介绍
+  - 概览
+  - 防火墙
+  - 路由表
+  - 系统日志
+  - 内核日志
+  - 系统进程
+  - 实时信息
+  - 实时监控
+  - WireGuard 状态
+  - 联机用户
+  - 负载均衡
+  - 释放内存
 
 </details>
 
 <details>
-  <summary>📁 第二项: 详细内容</summary>
+  <summary>📁 系统</summary>
 
   ### 子菜单 1
   - 详细内容 A
