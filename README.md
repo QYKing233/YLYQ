@@ -19,7 +19,7 @@
 </details>
 
 <details>
-  <summary>📁 系统</summary>
+  <summary>🔽 系统</summary>
 
   - 系统
   - 管理权
@@ -44,7 +44,7 @@
 </details>
 
 <details>
-  <summary>📁 服务</summary>
+  <summary>🔽 服务</summary>
 
   - PassWall
   - ShadowSocksR Plus+
@@ -75,7 +75,7 @@
 </details>
 
 <details>
-  <summary>📁 Docker</summary>
+  <summary>🔽 Docker</summary>
 
   - 概览
   - 容器
@@ -88,7 +88,7 @@
 </details>
 
 <details>
-  <summary>📁 网络存储</summary>
+  <summary>🔽 网络存储</summary>
 
   - 文件浏览器
   - Syncthing
@@ -106,7 +106,7 @@
 </details>
 
 <details>
-  <summary>📁 VPN</summary>
+  <summary>🔽 VPN</summary>
 
   - V2ray 服务器
   - N2N VPN
@@ -118,14 +118,13 @@
 </details>
 
 <details>
-  <summary>📁 网络</summary>
+  <summary>🔽 网络</summary>
 
   - 接口
   - DHCP/DNS
   - 主机名
   - IP/MAC 绑定
   - 静态路由
-  - QOS Nftables 版
   - 防火墙
   - 网络诊断
   - Socat
@@ -136,7 +135,7 @@
 </details>
 
 <details>
-  <summary>📁 带宽监控</summary>
+  <summary>🔽 带宽监控</summary>
 
   - 显示
   - 配置
@@ -146,7 +145,7 @@
 </details>
 
 <details>
-  <summary>📁 退出</summary>
+  <summary>🔽 退出</summary>
 
   - 啥也没有
 
