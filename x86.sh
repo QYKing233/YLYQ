@@ -13,7 +13,7 @@ mv ./YLYQ/patch ./
 
 
 # 更改 luci 版本
-patch -p1 < ./patch/general-change-luci-18.06.patch
+patch -p1 < ./patch/001-general-change-luci-18.06.patch
 
 
 # 添加 lede luci 软件包
@@ -235,7 +235,7 @@ popd
 
 
 # 修复 python3 编译失败
-patch -p1 < ./patch/general-change-setuptools-scm.patch
+patch -p1 < ./patch/001-general-change-setuptools-scm.patch
 
 
 # 添加 x86.config

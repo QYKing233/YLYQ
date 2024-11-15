@@ -1,0 +1,11 @@
+--- ../package/community/luci-app-socat/luasrc/model/cbi/socat/config.lua	2024-11-15 09:24:01.890886204 +0800
++++ ./config.lua	2024-11-15 10:18:55.052702460 +0800
+@@ -34,7 +34,7 @@
+ o.rmempty = false
+ o:depends("protocol", "port_forwards")
+ 
+-o = s:option(Flag, "reuseaddr", "reuseaddr", translate("Bind to a port local"))
++o = s:option(Flag, "reuseaddr", translate("Reuseaddr"), translate("Bind to a port local"))
+ o.default = "1"
+ o.rmempty = false
+ 

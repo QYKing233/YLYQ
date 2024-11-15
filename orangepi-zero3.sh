@@ -13,7 +13,7 @@ mv ./YLYQ/patch ./
 
 
 # 更改 luci 版本
-patch -p1 < ./patch/general-change-luci-18.06.patch
+patch -p1 < ./patch/001-general-change-luci-18.06.patch
 
 
 # 添加 lede luci 软件包
@@ -310,14 +310,14 @@ popd
 
 
 # 修复 python3 编译失败
-patch -p1 < ./patch/general-change-setuptools-scm.patch
+patch -p1 < ./patch/001-general-change-setuptools-scm.patch
 
 
 # 添加  orangepi-zero3 patch
-cp ./patch/orangepi-zero3-enable-i2c-1.patch ./target/linux/sunxi/patches-6.1/
-cp ./patch/orangepi-fix-yt8531C-phy-1.patch ./target/linux/sunxi/patches-6.1/
-cp ./patch/orangepi-fix-yt8531C-phy-2.patch ./target/linux/sunxi/patches-6.1/
-cp ./patch/orangepi-fix-yt8531C-phy-3.patch ./target/linux/sunxi/patches-6.1/
+cp ./patch/001-orangepi-zero3-enable-i2c1.patch ./target/linux/sunxi/patches-6.1/
+cp ./patch/001-orangepi-fix-yt8531C-phy.patch ./target/linux/sunxi/patches-6.1/
+cp ./patch/002-orangepi-fix-yt8531C-phy.patch ./target/linux/sunxi/patches-6.1/
+cp ./patch/003-orangepi-fix-yt8531C-phy.patch ./target/linux/sunxi/patches-6.1/
 
 
 # 添加 orangepi-zero3 config

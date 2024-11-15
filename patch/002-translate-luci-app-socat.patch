@@ -1,0 +1,12 @@
+--- ../package/community/luci-app-socat/po/zh-cn/socat.po	2024-11-15 09:24:01.890886204 +0800
++++ ./socat.po	2024-11-15 10:20:07.894080560 +0800
+@@ -37,6 +37,9 @@
+ msgid "Bind to a port local"
+ msgstr "绑定到本地端口"
+ 
++msgid "Reuseaddr"
++msgstr "端口重用"
++
+ msgid "Destination Protocol"
+ msgstr "目标协议"
+ 
