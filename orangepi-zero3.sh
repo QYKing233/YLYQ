@@ -123,7 +123,7 @@ rm -rf ./*
 popd
 
 
-# 删除LEDE luci-app-socat
+# 删除 LEDE luci-app-socat
 rm -rf feeds/luci/applications/luci-app-socat
 
 
@@ -172,7 +172,7 @@ sed -i '882 s/cidr/string/g' ./package/community/helloworld/luci-app-ssr-plus/lu
 sed -i 's/..\/..\/luci.mk/$(TOPDIR)\/feeds\/luci\/luci.mk/g' ./package/community/*/Makefile
 
 
-# 删除默认 luci-theme-argon & luci-app-argon-config 插件
+# 删除 LEDE luci-theme-argon & luci-app-argon-config 插件
 rm -rf feeds/luci/themes/luci-theme-argon 
 rm -rf feeds/luci/applications/luci-app-argon-config
 
@@ -195,7 +195,7 @@ rm -rf ./gcc
 sed -i 's/normal/dark/g' ./package/community/luci-app-argon-config/root/etc/config/argon
 
 
-# 调整默认 IP 与 Hostname
+# 调整 IP 与 Hostname
 sed -i 's/192.168.1.1/192.168.5.1/g' package/base-files/files/bin/config_generate
 sed -i 's/OpenWrt/YLYQ/g' package/base-files/files/bin/config_generate
 
@@ -209,7 +209,7 @@ date_version=$(date +"%Y-%m-%d")
 sed -i "56 s/LEDE/LEDE ($date_version) Build_By : YLYQ/g" ./package/lean/default-settings/files/zzz-default-settings
 
 
-# 调整默认 shell 为 zsh
+# 调整 shell 为 zsh
 sed -i 's/\/bin\/ash/\/usr\/bin\/zsh/g' package/base-files/files/etc/passwd
 
 
