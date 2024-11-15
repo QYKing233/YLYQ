@@ -113,8 +113,18 @@ mv ./OpenWrt-Add/luci-app-irqbalance ../community
 rm -rf ./*
 
 
+# 添加 Lienol luci-app-socat
+git clone --depth=1 https://github.com/Lienol/openwrt-package.git
+mv ./openwrt-package/luci-app-socat ../community
+rm -rf ./*
+
+
 # 退出 repo 目录
 popd
+
+
+# 删除LEDE luci-app-socat
+rm -rf feeds/luci/applications/luci-app-socat
 
 
 # 调整 luci-app-irqbalance 翻译文件
