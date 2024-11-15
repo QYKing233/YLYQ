@@ -1,0 +1,12 @@
+--- ../package/community/luci-app-syncthing/po/zh-cn/syncthing.po	2024-11-11 23:47:40.774679944 +0800
++++ ./syncthing.po	2024-11-15 13:43:23.914070862 +0800
+@@ -28,6 +28,9 @@
+ msgid "Thread limit"
+ msgstr "线程限制"
+ 
++msgid "Nice"
++msgstr "进程优先级"
++
+ msgid "0 to match the number of CPUs (default), >0 to explicitly specify concurrency."
+ msgstr "使用0来匹配CPU核心数，或输入大于0的数来显式指定并发数。"
+ 

@@ -1,0 +1,11 @@
+--- ../package/community/luci-app-syncthing/luasrc/model/cbi/syncthing.lua	2024-11-11 23:47:40.774679944 +0800
++++ ./syncthing.lua	2024-11-15 13:42:11.668186773 +0800
+@@ -41,7 +41,7 @@
+ macprocs.datatype="range(0,32)"
+ macprocs.rmempty = false
+ 
+-nice = s:option(Value, "nice", "Nice")
++nice = s:option(Value, "nice", translate("Nice"))
+ nice.description = translate("Explicitly specify nice. 0 is the highest and 19 is the lowest. (negative values are not allowed to be set temporarily)")
+ nice.default = "19"
+ nice.placeholder = "19"

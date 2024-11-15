@@ -238,6 +238,16 @@ popd
 patch -p1 < ./patch/001-general-change-setuptools-scm.patch
 
 
+# 翻译 luci-app-socat 中的 reuseaddr 标签
+patch -p1 < ./patch/001-translate-luci-app-socat.patch
+patch -p1 < ./patch/002-translate-luci-app-socat.patch
+
+
+# 翻译 luci-app-syncthing 中的 nice 标签
+patch -p1 < ./patch/001-translate-luci-app-syncthing.patch
+patch -p1 < ./patch/002-translate-luci-app-syncthing.patch
+
+
 # 添加 x86.config
 rm -rf ./.config
 mv ./YLYQ/x86.config ./
