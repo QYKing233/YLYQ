@@ -20,8 +20,8 @@ patch -p1 < ./patch/001-general-change-luci-18.06.patch
 ./scripts/feeds update -a && ./scripts/feeds install -a
 
 
-# 删除 lede 的 dae daed ddns-go alist v2raya v2raya-geodata xray-core
-rm -rf ./feeds/packages/net/{dae,daed,ddns-go,alist,v2raya,v2raya-geodata,xray-core}
+# 删除 lede 的 dae daed ddns-go lucky alist v2raya v2raya-geodata xray-core trojan
+rm -rf ./feeds/packages/net/{dae,daed,ddns-go,lucky,alist,v2raya,v2raya-geodata,xray-core,trojan}
 
 
 # 添加 luci-app-daed
