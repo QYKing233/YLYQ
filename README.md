@@ -23,7 +23,6 @@
 
   - 系统
   - 管理权
-  - 中断均衡器
   - TTYD 终端
   - 软件包
   - 启动项
@@ -61,13 +60,9 @@
   - WatchCat
   - 网络唤醒
   - Frps
-  - AirPlay 2 音频接收器
-  - HAProxy
-  - Tinyproxy
   - UPnP
   - Frp 内网穿透
   - uHTTPd
-  - udpxy
   - KMS 服务器
   - Nps 内网穿透
   - MWAN3 分流助手
@@ -96,12 +91,8 @@
   - qBittorrent
   - USB 打印服务器
   - 硬盘休眠
-  - miniDLNA
   - FTP 服务器
   - 网络共享
-  - MJPG-streamer
-  - Aria2 配置
-  - Rclone
 
 </details>
 
