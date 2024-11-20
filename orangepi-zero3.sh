@@ -27,8 +27,7 @@ pushd ./package/dae/luci-app-daed/po
 ln -s zh_Hans zh-cn
 popd
 # 删除 lede 的 dae daed
-rm -rf ./feeds/packages/net/dae
-rm -rf ./feeds/packages/net/daed
+rm -rf ./feeds/packages/net/{dae,daed}
 
 
 # 创建 community 目录
