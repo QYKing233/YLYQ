@@ -20,14 +20,16 @@ patch -p1 < ./patch/001-general-change-luci-18.06.patch
 ./scripts/feeds update -a && ./scripts/feeds install -a
 
 
+# 删除 lede 的 dae daed ddns-go alist v2raya v2raya-geodata xray-core
+rm -rf ./feeds/packages/net/{dae,daed,ddns-go,alist,v2raya,v2raya-geodata,xray-core}
+
+
 # 添加 luci-app-daed
 git clone --depth=1 https://github.com/QiuSimons/luci-app-daed.git ./package/dae
 # 调整 luci-app-daed 翻译文件
 pushd ./package/dae/luci-app-daed/po
 ln -s zh_Hans zh-cn
 popd
-# 删除 lede 的 dae daed
-rm -rf ./feeds/packages/net/{dae,daed}
 
 
 # 创建 community 目录
