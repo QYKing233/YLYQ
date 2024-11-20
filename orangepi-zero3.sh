@@ -118,7 +118,7 @@ popd
 
 
 # 删除 LEDE luci-app-socat
-rm -rf feeds/luci/applications/luci-app-socat
+rm -rf ./feeds/luci/applications/luci-app-socat
 
 
 # 调整 luci-app-filebrowser 到 NAS 菜单
@@ -149,8 +149,8 @@ sed -i 's/..\/..\/luci.mk/$(TOPDIR)\/feeds\/luci\/luci.mk/g' ./package/community
 
 
 # 删除 LEDE luci-theme-argon & luci-app-argon-config 插件
-rm -rf feeds/luci/themes/luci-theme-argon 
-rm -rf feeds/luci/applications/luci-app-argon-config
+rm -rf ./feeds/luci/themes/luci-theme-argon 
+rm -rf ./feeds/luci/applications/luci-app-argon-config
 
 
 # 调整 luci-theme-argon 的背景图片 
@@ -222,14 +222,14 @@ mkdir -p ./target/linux/sunxi/base-files/usr/bin
 
 # 添加 oled files
 mv ./YLYQ/oled/* ./target/linux/sunxi/base-files/etc/oled/
-pushd  ./target/linux/sunxi/base-files/etc/oled/
+pushd ./target/linux/sunxi/base-files/etc/oled/
 chmod 0755 ./*
 popd
 
 
 # 添加 gpio_fan shell scripts
 mv ./YLYQ/shell_scripts/gpio_fan.sh ./target/linux/sunxi/base-files/usr/bin/
-pushd  ./target/linux/sunxi/base-files/usr/bin/
+pushd ./target/linux/sunxi/base-files/usr/bin/
 chmod 0755 ./gpio_fan.sh
 popd
 
@@ -237,7 +237,7 @@ popd
 # 添加 oled service_management
 mv ./YLYQ/service_management/oled ./target/linux/sunxi/base-files/etc/init.d/
 mv ./YLYQ/service_management/check_luma ./target/linux/sunxi/base-files/etc/init.d/
-pushd  ./target/linux/sunxi/base-files/etc/init.d/
+pushd ./target/linux/sunxi/base-files/etc/init.d/
 chmod 0755 ./oled
 chmod 0755 ./check_luma
 popd
@@ -245,42 +245,42 @@ popd
 
 # 添加 reload_yt8531c service_management
 mv ./YLYQ/service_management/reload_yt8531c ./target/linux/sunxi/base-files/etc/init.d/
-pushd  ./target/linux/sunxi/base-files/etc/init.d/
+pushd ./target/linux/sunxi/base-files/etc/init.d/
 chmod 0755 ./reload_yt8531c
 popd
 
 
 # 添加 gpio_fan service_management
 mv ./YLYQ/service_management/gpio_fan ./target/linux/sunxi/base-files/etc/init.d/
-pushd  ./target/linux/sunxi/base-files/etc/init.d/
+pushd ./target/linux/sunxi/base-files/etc/init.d/
 chmod 0755 ./gpio_fan
 popd
 
 
 # 添加 reload_yt8531c service_management_start
 mv ./YLYQ/service_management_start/S99reload_yt8531c ./target/linux/sunxi/base-files/etc/rc.d/
-pushd  ./target/linux/sunxi/base-files/etc/rc.d/
+pushd ./target/linux/sunxi/base-files/etc/rc.d/
 chmod 0755 ./S99reload_yt8531c
 popd
 
 
 # 添加 gpio_fan service_management_start
 mv ./YLYQ/service_management_start/S21gpio_fan ./target/linux/sunxi/base-files/etc/rc.d/
-pushd  ./target/linux/sunxi/base-files/etc/rc.d/
+pushd ./target/linux/sunxi/base-files/etc/rc.d/
 chmod 0755 ./S21gpio_fan
 popd
 
 
 # 添加 check_luma service_management_start
 mv ./YLYQ/service_management_start/S99check_luma ./target/linux/sunxi/base-files/etc/rc.d/
-pushd  ./target/linux/sunxi/base-files/etc/rc.d/
+pushd ./target/linux/sunxi/base-files/etc/rc.d/
 chmod 0755 ./S99check_luma
 popd
 
 
 # 添加 oled service_management_start
 mv ./YLYQ/service_management_start/S30oled ./target/linux/sunxi/base-files/etc/rc.d/
-pushd  ./target/linux/sunxi/base-files/etc/rc.d/
+pushd ./target/linux/sunxi/base-files/etc/rc.d/
 chmod 0755 ./S30oled
 popd
 
