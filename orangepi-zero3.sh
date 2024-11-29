@@ -24,12 +24,14 @@ patch -p1 < ./patch/001-general-change-luci-18.06.patch
 rm -rf ./feeds/packages/net/{dae,daed,ddns-go,lucky,alist,v2raya,v2raya-geodata,xray-core,trojan}
 
 
-# 添加 luci-app-daed
+# 添加 luci-app-daed daed
 git clone --depth=1 https://github.com/QiuSimons/luci-app-daed.git ./package/dae
 # 调整 luci-app-daed 翻译文件
 pushd ./package/dae/luci-app-daed/po
 ln -s zh_Hans zh-cn
 popd
+git clone --depth=1 https://github.com/immortalwrt/packages.git ./package/daed
+mv ./package/daed/net/daed ./package/net
 
 
 
@@ -100,7 +102,7 @@ mv ./luci/applications/luci-app-syncthing ../community
 rm -rf ./*
 
 
-# 添加 luci-app-beardropper & luci-app-onliner & luci-app-poweroff
+# 添加 luci-app-beardropper & luci-app-onliner & luci-app-poweroff & libcron
 git clone --depth=1 https://github.com/kenzok8/small-package.git
 mv ./small-package/luci-app-beardropper ../community
 mv ./small-package/luci-app-onliner ../community
