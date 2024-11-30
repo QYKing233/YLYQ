@@ -174,7 +174,7 @@ sed -i 's/normal/dark/g' ./package/community/luci-app-argon-config/root/etc/conf
 
 # 调整 IP 与 Hostname
 sed -i 's/192.168.1.1/192.168.5.1/g' package/base-files/files/bin/config_generate
-sed -i 's/OpenWrt/YLYQ/g' package/base-files/files/bin/config_generate
+sed -i 's/LEDE/YLYQ/g' package/base-files/files/bin/config_generate
 
 
 # 调整日期样式
@@ -183,7 +183,7 @@ sed -i 's/os.date()/os.date("%a %Y-%m-%d %H:%M:%S")/g' package/lean/autocore/fil
 
 # 添加编译日期
 date_version=$(date +"%Y-%m-%d")
-sed -i "56 s/LEDE/LEDE ($date_version) Build_By : YLYQ/g" ./package/lean/default-settings/files/zzz-default-settings
+sed -i "52 s/LEDE/YLYQ ($date_version) Build_By : YLYQ/g" ./package/lean/default-settings/files/zzz-default-settings
 
 
 # 调整 shell 为 zsh
