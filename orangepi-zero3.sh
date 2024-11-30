@@ -183,7 +183,7 @@ sed -i 's/os.date()/os.date("%a %Y-%m-%d %H:%M:%S")/g' package/lean/autocore/fil
 
 # 添加编译日期
 date_version=$(date +"%Y-%m-%d")
-sed -i "52 s/LEDE/LEDE ($date_version) Build_By : YLYQ/g" ./package/lean/default-settings/files/zzz-default-settings
+sed -i "52 s/LEDE/YLYQ ($date_version) Build_By : YLYQ/g" ./package/lean/default-settings/files/zzz-default-settings
 
 
 # 调整 shell 为 zsh
