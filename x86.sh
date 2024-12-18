@@ -165,7 +165,7 @@ popd
 
 # 更换 OpenWRT 官方仓库 gcc
 rm -rf ./feeds/packages/devel/gcc
-git clone -b openwrt-23.05 --depth=1 https://github.com/openwrt/packages ./gcc
+git clone --depth=1 https://github.com/openwrt/packages ./gcc
 mv ./gcc/devel/gcc ./feeds/packages/devel
 rm -rf ./gcc
 
