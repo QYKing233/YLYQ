@@ -13,7 +13,7 @@ mv ./YLYQ/patch ./
 
 
 # 更改 luci 版本
-patch -p1 < ./patch/001-general-change-luci-18.06.patch
+patch -p1 < ./patch/A001-general-change-luci-18.06.patch
 
 
 # 添加 lede luci 软件包
@@ -142,11 +142,6 @@ sed -i 's/ipaddr/string/g' ./feeds/luci/applications/luci-app-nps/luasrc/model/c
 sed -i '/Must an IPv4 address/d' ./feeds/luci/applications/luci-app-nps/luasrc/model/cbi/nps.lua
 
 
-# 调整 ShadowsocksR Plus+ 的 wireguard 本地地址数据类型为 string
-sed -i '857 s/cidr/string/g' ./package/community/helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/client-config.lua
-sed -i '882 s/cidr/string/g' ./package/community/helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/client-config.lua
-
-
 # 调整 Makefile 文件中 include 的路径
 sed -i 's/..\/..\/luci.mk/$(TOPDIR)\/feeds\/luci\/luci.mk/g' ./package/community/*/Makefile
 
@@ -185,7 +180,7 @@ sed -i 's/os.date()/os.date("%a %Y-%m-%d %H:%M:%S")/g' package/lean/autocore/fil
 
 # 添加编译日期
 date_version=$(date +"%Y-%m-%d")
-sed -i "52 s/LEDE/LEDE ($date_version) Build_By : YLYQ/g" ./package/lean/default-settings/files/zzz-default-settings
+sed -i "56 s/LEDE/LEDE ($date_version) Build_By : YLYQ/g" ./package/lean/default-settings/files/zzz-default-settings
 
 
 # 调整 shell 为 zsh
@@ -217,17 +212,21 @@ popd
 
 
 # 修复 python3 编译失败
-patch -p1 < ./patch/001-general-change-setuptools-scm.patch
+patch -p1 < ./patch/A001-general-change-setuptools-scm.patch
 
 
 # 翻译 luci-app-socat 中的 reuseaddr 标签
-patch -p1 < ./patch/001-translate-luci-app-socat.patch
-patch -p1 < ./patch/002-translate-luci-app-socat.patch
+patch -p1 < ./patch/A001-translate-luci-app-socat.patch
+patch -p1 < ./patch/A002-translate-luci-app-socat.patch
 
 
 # 翻译 luci-app-syncthing 中的 nice 标签
-patch -p1 < ./patch/001-translate-luci-app-syncthing.patch
-patch -p1 < ./patch/002-translate-luci-app-syncthing.patch
+patch -p1 < ./patch/A001-translate-luci-app-syncthing.patch
+patch -p1 < ./patch/A002-translate-luci-app-syncthing.patch
+
+
+# 调整 ShadowsocksR Plus+ 的 wireguard 本地地址数据类型为 string
+patch -p1 < ./patch/A001-fix-luci-app-ssr-plus-wireguard-string.patch
 
 
 # 添加 x86.config

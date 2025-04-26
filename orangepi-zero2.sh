@@ -294,10 +294,9 @@ cp ./patch/A003-orangepi-fix-yt8531C-phy.patch ./target/linux/sunxi/patches-6.1/
 
 # 添加 orangepi-zero2 config
 rm -rf ./.config
-mv ./YLYQ/orangepi-zero2.config ./
+mv ./YLYQ/orangepi-zero2.config ./.config
 # mv ./YLYQ/dae.config ./
 # cat ./dae.config >> ./orangepi-zero3.config
-mv ./orangepi-zero2.config ./.config
 
 
 # 删除 YLYQ
