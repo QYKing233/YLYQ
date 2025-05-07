@@ -120,7 +120,11 @@ class OLEDMonitor:
             else:
                 self.device.clear()
                 self.device.hide()
-                time.sleep(60)
+                while True:
+                    if 6 <= time.localtime().tm_hour <= 24:
+                        break
+                    else:
+                        time.sleep(60)
 
 
 if __name__ == '__main__':
