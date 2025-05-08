@@ -92,6 +92,11 @@ class OLEDMonitor:
 
         self.device.show()
 
+    def _shutdown(self):
+        self.executor.shutdown(wait=False)
+        self.device.clear()
+        self.device.hide()
+
     def run(self):
         """主运行逻辑"""
         # 显示启动画面
@@ -101,10 +106,10 @@ class OLEDMonitor:
         time.sleep(5)
         self.device.clear()
         while True:
-            if 6 <= time.localtime().tm_hour <= 24:
+            if 6 <= time.localtime().tm_hour <= 23:
                 data = self._parallel_fetch()
                 self._display(data)
-                
+
                 # 每60s显示一次LOGO
                 self.counter += 1
                 if self.counter >= 60:  # 60s
@@ -113,15 +118,13 @@ class OLEDMonitor:
                         draw.text((20, 54), "O P E N W R T", fill=255, font=self.font)
                     self.device.show()
                     time.sleep(10)
-                    self.device.clear()
-                    self.device.hide()
+                    self._shutdown()
                     time.sleep(10)
                     self.counter = 0
             else:
-                self.device.clear()
-                self.device.hide()
+                self._shutdown()
                 while True:
-                    if 6 <= time.localtime().tm_hour <= 24:
+                    if 6 <= time.localtime().tm_hour <= 23:
                         break
                     else:
                         time.sleep(60)
