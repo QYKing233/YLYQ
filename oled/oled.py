@@ -93,7 +93,6 @@ class OLEDMonitor:
         self.device.show()
 
     def _shutdown(self):
-        self.executor.shutdown(wait=False)
         self.device.clear()
         self.device.hide()
 
@@ -123,6 +122,7 @@ class OLEDMonitor:
                     self.counter = 0
             else:
                 self._shutdown()
+                self.executor.shutdown(wait=False)
                 while True:
                     if 6 <= time.localtime().tm_hour <= 23:
                         break
