@@ -25,7 +25,7 @@ rm -rf ./feeds/packages/net/{dae,daed,ddns-go,lucky,alist,v2raya,v2raya-geodata,
 
 
 # 添加 luci-app-daed daed
-git clone --depth=1 https://github.com/QiuSimons/luci-app-daed.git ./package/dae
+git clone -b stable --depth=1 https://github.com/QiuSimons/luci-app-daed.git ./package/dae
 # 调整 luci-app-daed 翻译文件
 pushd ./package/dae/luci-app-daed/po
 ln -s zh_Hans zh-cn
