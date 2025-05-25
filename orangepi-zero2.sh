@@ -25,7 +25,7 @@ rm -rf ./feeds/packages/net/{dae,daed,ddns-go,lucky,alist,v2raya,v2raya-geodata,
 
 
 # 添加 luci-app-daed daed
-git clone --depth=1 https://github.com/QiuSimons/luci-app-daed.git ./package/dae
+git clone -b stable --depth=1 https://github.com/QiuSimons/luci-app-daed.git ./package/dae
 # 调整 luci-app-daed 翻译文件
 pushd ./package/dae/luci-app-daed/po
 ln -s zh_Hans zh-cn
@@ -283,6 +283,10 @@ patch -p1 < ./patch/A002-translate-luci-app-syncthing.patch
 
 # 调整 ShadowsocksR Plus+ 的 wireguard 本地地址数据类型为 string
 patch -p1 < ./patch/A001-fix-luci-app-ssr-plus-wireguard-string.patch
+
+
+# 翻译 lan 接口 dhcp 相关
+patch -p1 < ./patch/A001-translate-luci-mod-admin-full.patch
 
 
 # 添加  orangepi-zero3 patch
