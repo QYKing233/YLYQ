@@ -78,7 +78,7 @@ class OLEDMonitor:
         with canvas(self.device) as draw:
             # 状态栏
             if data['fan'] == 1:
-                draw.text((0, 0), f"{'*':>18}", fill=255, font=font)
+                draw.text((0, 0), f"{'*':>18}", fill=255, font=self.font)
 
             # 主体信息
             draw.text((0, 0), f"TMP: {data['temp']:.1f}°C", font=self.font, fill=255)
