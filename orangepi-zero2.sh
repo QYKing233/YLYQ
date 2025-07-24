@@ -40,8 +40,8 @@ mkdir -p package/community
 pushd package/community
 
 
-# 添加 luci-app-alist
-git clone -b lua --depth=1 https://github.com/sbwml/luci-app-alist.git
+# 添加 luci-app-openlist2
+git clone -b lua --depth=1 https://github.com/sbwml/luci-app-openlist2.git
 
 
 # 添加 luci-app-passwall
