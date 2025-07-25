@@ -20,12 +20,12 @@ patch -p1 < ./patch/A001-general-change-luci-18.06.patch
 ./scripts/feeds update -a && ./scripts/feeds install -a
 
 
-# 删除 lede 的 dae daed ddns-go lucky alist v2raya v2raya-geodata xray-core trojan
-rm -rf ./feeds/packages/net/{dae,daed,ddns-go,lucky,alist,v2raya,v2raya-geodata,xray-core,trojan}
+# 删除 lede 的 dae daed
+rm -rf ./feeds/packages/net/{dae,daed}
 
 
 # 添加 luci-app-daed
-git clone -b stable --depth=1 https://github.com/QiuSimons/luci-app-daed.git ./package/dae
+git clone --depth=1 https://github.com/QiuSimons/luci-app-daed.git ./package/dae
 # 调整 luci-app-daed 翻译文件
 pushd ./package/dae/luci-app-daed/po
 ln -s zh_Hans zh-cn
@@ -39,10 +39,6 @@ mkdir -p package/community
 
 # 把 community 目录置为当前
 pushd package/community
-
-
-# 添加 luci-app-alist
-git clone -b lua --depth=1 https://github.com/sbwml/luci-app-alist.git
 
 
 # 添加 luci-app-passwall
