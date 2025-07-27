@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-# 为 Alist daed 安装某些软件包
+# 为 openlist daed 安装某些软件包
 # sudo apt install libfuse-dev
 # sudo apt install llvm
 # sudo apt install libbpf-dev
