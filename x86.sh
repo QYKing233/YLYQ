@@ -41,13 +41,6 @@ mkdir -p package/community
 pushd package/community
 
 
-<<<<<<< HEAD
-=======
-# 添加 luci-app-openlist2
-git clone -b lua --depth=1 https://github.com/sbwml/luci-app-openlist2.git
-
-
->>>>>>> 6f2033e6f2d279d03f8f373c9f071a568ad19f97
 # 添加 luci-app-passwall
 git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall.git
 git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall-packages.git
