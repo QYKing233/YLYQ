@@ -131,6 +131,11 @@ sed -i 's/services/vpn/g' ./feeds/luci/applications/luci-app-v2ray-server/luasrc
 sed -i 's/services/vpn/g' ./feeds/luci/applications/luci-app-v2ray-server/luasrc/view/v2ray_server/*.htm
 
 
+# 调整 Nps 内网穿透 服务器地址数据类型为 string
+sed -i 's/ipaddr/string/g' ./feeds/luci/applications/luci-app-nps/luasrc/model/cbi/nps.lua
+sed -i '/Must an IPv4 address/d' ./feeds/luci/applications/luci-app-nps/luasrc/model/cbi/nps.lua
+
+
 # 调整 Makefile 文件中 include 的路径
 sed -i 's/..\/..\/luci.mk/$(TOPDIR)\/feeds\/luci\/luci.mk/g' ./package/community/*/Makefile
 
