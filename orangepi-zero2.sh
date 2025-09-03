@@ -284,8 +284,8 @@ patch -p1 < ./patch/A001-fix-luci-app-ssr-plus-wireguard-string.patch
 # 添加 orangepi-zero2 config
 rm -rf ./.config
 mv ./YLYQ/orangepi-zero2.config ./.config
-# mv ./YLYQ/dae.config ./
-# cat ./dae.config >> ./orangepi-zero2.config
+mv ./YLYQ/dae.config ./
+cat ./dae.config >> ./orangepi-zero2.config
 
 
 # 删除 YLYQ
