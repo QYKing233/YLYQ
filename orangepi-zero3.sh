@@ -283,9 +283,6 @@ patch -p1 < ./patch/A001-fix-luci-app-ssr-plus-wireguard-string.patch
 
 # 添加  orangepi-zero3 patch
 cp ./patch/A001-orangepi-zero3-enable-i2c1.patch ./target/linux/sunxi/patches-6.12/
-cp ./patch/A001-orangepi-fix-yt8531C-phy.patch ./target/linux/sunxi/patches-6.12/
-cp ./patch/A002-orangepi-fix-yt8531C-phy.patch ./target/linux/sunxi/patches-6.12/
-cp ./patch/A003-orangepi-fix-yt8531C-phy.patch ./target/linux/sunxi/patches-6.12/
 
 
 # 添加 orangepi-zero3 config
