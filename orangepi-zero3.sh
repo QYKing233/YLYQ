@@ -263,10 +263,6 @@ chmod 0755 ./S30oled
 popd
 
 
-# 修复 python3 编译失败
-patch -p1 < ./patch/A001-general-change-setuptools-scm.patch
-
-
 # 翻译 luci-app-socat 中的 reuseaddr 标签
 patch -p1 < ./patch/A001-translate-luci-app-socat.patch
 patch -p1 < ./patch/A002-translate-luci-app-socat.patch
