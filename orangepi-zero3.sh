@@ -55,7 +55,7 @@ git clone -b 18.06 --depth=1 https://github.com/jerrykuku/luci-theme-argon.git
 
 
 # 添加 open-app-filter
-git clone --depth=1 https://github.com/destan19/OpenAppFilter.git
+git clone --depth=1 https://github.com/destan19/OpenAppFilter.git /package/OpenAppFilter
 
 
 # 添加 luci-app-filebrowser
@@ -285,7 +285,7 @@ cp ./patch/A001-orangepi-zero3-enable-i2c1.patch ./target/linux/sunxi/patches-6.
 rm -rf ./.config
 mv ./YLYQ/orangepi-zero3.config ./.config
 mv ./YLYQ/dae.config ./
-cat ./dae.config >> ./orangepi-zero3.config
+cat ./dae.config >> ./.config
 
 
 # 删除 YLYQ
