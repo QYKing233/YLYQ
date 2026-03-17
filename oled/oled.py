@@ -12,11 +12,11 @@ from concurrent.futures import ThreadPoolExecutor
 def format_size(bytes_value):
     """数据格式化"""
     if bytes_value < 1024 ** 2:
-        return f"{bytes_value / 1024:.1f}K"
+        return f"{bytes_value / 1024:.1f}KB"
     elif bytes_value < 1024 ** 3:
-        return f"{bytes_value / 1024 ** 2:.1f}M"
+        return f"{bytes_value / 1024 ** 2:.1f}MB"
     else:
-        return f"{bytes_value / 1024 ** 3:.1f}G"
+        return f"{bytes_value / 1024 ** 3:.1f}GB"
 
 
 class OLEDMonitor:
@@ -25,7 +25,7 @@ class OLEDMonitor:
     def __init__(self):
         # 初始化硬件
         self.device = sh1106(i2c(port=1, address=0x3C))
-        self.font = ImageFont.truetype("/etc/oled/Anonymous.ttf", 12)
+        self.font = ImageFont.truetype("/etc/oled/ter-u12n.bdf", 12)
         self.logo = Image.open("/etc/oled/logo.png").resize((self.device.width, self.device.height))
         self.boot = Image.open("/etc/oled/boot.png").resize((self.device.width, self.device.height))
         self.device.contrast(50)
@@ -48,16 +48,19 @@ class OLEDMonitor:
         }
         return {k: v.result() for k, v in futures.items()}
 
-    def _get_temp(self):
+    @staticmethod
+    def _get_temp():
         with open("/sys/class/thermal/thermal_zone0/temp") as temp:
             return float(temp.read()) / 1000
 
-    def _get_fan(self):
+    @staticmethod
+    def _get_fan():
         result = subprocess.run(["cat", "/sys/class/gpio/gpio74/value"],
                                 capture_output=True, text=True)
         return int(result.stdout)
 
-    def _get_network(self):
+    @staticmethod
+    def _get_network():
         """简化网络监控"""
         start = psutil.net_io_counters(pernic=True)['br-lan']
         time.sleep(1)
@@ -67,7 +70,8 @@ class OLEDMonitor:
             f"{format_size(end.bytes_sent - start.bytes_sent)}/S"
         )
 
-    def _get_ip(self):
+    @staticmethod
+    def _get_ip():
         try:
             return psutil.net_if_addrs()['br-lan'][0].address
         except:
@@ -78,17 +82,17 @@ class OLEDMonitor:
         with canvas(self.device) as draw:
             # 状态栏
             if data['fan'] == 1:
-                draw.text((0, 0), f"{'*':>18}", fill=255, font=self.font)
-
+                draw.text((0, 0), f"{'*':>21}", fill=255, font=self.font)
             # 主体信息
-            draw.text((0, 0), f"TMP: {data['temp']:.1f}°C", font=self.font, fill=255)
-            draw.text((0, 10), f"CPU: {int(data['freq'])}MHz[{int(data['cpu'])}%]", font=self.font, fill=255)
-            draw.text((0, 21), f"RAM: {format_size(data['mem'].used)}/{format_size(data['mem'].total)}", fill=255,
+            draw.text((0, 0), f"REC:{data['net'][0]}", fill=255, font=self.font)
+            draw.text((0, 10), f"SEN:{data['net'][1]}", fill=255, font=self.font)
+            draw.text((0, 21), f"LAN:{data['ip']}", font=self.font, fill=255)
+            draw.text((0, 32), f"RAM:{format_size(data['mem'].used)}/{format_size(data['mem'].total)}", fill=255,
                       font=self.font)
-            draw.text((0, 32), f"HDD: {format_size(data['disk'].used)}/{format_size(data['disk'].total)}", fill=255,
+            draw.text((0, 43), f"HDD:{format_size(data['disk'].used)}/{format_size(data['disk'].total)}", fill=255,
                       font=self.font)
-            draw.text((0, 43), f"LAN: {data['ip']}", font=self.font, fill=255)
-            draw.text((0, 54), f"{data['net'][0]:<9}{data['net'][1]:>9}", fill=255, font=self.font)
+            draw.text((0, 54), f"CPU:{int(data['freq'])}MHz|{int(data['cpu'])}%|{int(data['temp'])}°C", font=self.font,
+                      fill=255)
 
         self.device.show()
 
@@ -114,7 +118,7 @@ class OLEDMonitor:
                 if self.counter >= 60:  # 60s
                     with canvas(self.device) as draw:
                         draw.bitmap((0, 0), self.logo, fill=255)
-                        draw.text((20, 54), "O P E N W R T", fill=255, font=self.font)
+                        draw.text((21, 54), "O P E N W R T", fill=255, font=self.font)
                     self.device.show()
                     time.sleep(10)
                     self._shutdown()

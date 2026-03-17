@@ -7,7 +7,7 @@ proxy-providers:
       enable: true
       url: https://www.gstatic.com/generate_204
       interval: 5000
-    proxy: 直连
+    proxy: 🟢 直连
     header:
       User-Agent:
       - "Clash.meta"
@@ -25,8 +25,11 @@ mode: rule
 
 
 proxies:
-  - name: "直连"
+  - name: "🟢 直连"
     type: direct
+    udp: true
+  - name: "🔴 拒绝"
+    type: reject
     udp: true
   
 
@@ -51,37 +54,39 @@ dns:
 
 
 proxy-groups:
-  - {name: 🚀 默认代理, type: select, proxies: [♻️ 香港自动, ♻️ 日本自动, ♻️ 台湾自动, ♻️ 美国自动, ♻️ 自动选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇹🇼 台湾节点, 🇺🇸 美国节点]}
-  - {name: 📹 YouTube, type: select, proxies: [♻️ 美国自动, ♻️ 香港自动, ♻️ 日本自动, ♻️ 台湾自动, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇹🇼 台湾节点, 🇺🇸 美国节点]}
-  - {name: 🍀 Google, type: select, proxies: [♻️ 美国自动, ♻️ 日本自动, ♻️ 香港自动,  ♻️ 台湾自动, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇹🇼 台湾节点, 🇺🇸 美国节点]}
-  - {name: 🤖 ChatGPT, type: select, proxies: [♻️ 美国自动, ♻️ 日本自动, ♻️ 香港自动, ♻️ 台湾自动, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇹🇼 台湾节点, 🇺🇸 美国节点]}
-  - {name: 👨🏿‍💻 GitHub, type: select, proxies: [♻️ 日本自动, ♻️ 香港自动, ♻️ 台湾自动, ♻️ 美国自动, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇹🇼 台湾节点, 🇺🇸 美国节点]}
-  - {name: 🐬 OneDrive, type: select, proxies: [♻️ 美国自动, ♻️ 日本自动, ♻️ 香港自动, ♻️ 台湾自动, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇹🇼 台湾节点, 🇺🇸 美国节点]}
-  - {name: 🙉 Microsoft, type: select, proxies: [♻️ 美国自动, ♻️ 日本自动, ♻️ 香港自动, ♻️ 台湾自动, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇹🇼 台湾节点, 🇺🇸 美国节点]}
-  - {name: 🎵 TikTok, type: select, proxies: [♻️ 美国自动, ♻️ 日本自动, ♻️ 香港自动, ♻️ 台湾自动, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇹🇼 台湾节点, 🇺🇸 美国节点]}
-  - {name: 📲 Telegram, type: select, proxies: [♻️ 日本自动, ♻️ 香港自动, ♻️ 台湾自动, ♻️ 美国自动, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇹🇼 台湾节点, 🇺🇸 美国节点]}
-  - {name: 🎥 NETFLIX, type: select, proxies: [♻️ 美国自动, ♻️ 日本自动, ♻️ 香港自动, ♻️ 台湾自动, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇹🇼 台湾节点, 🇺🇸 美国节点]}
-  - {name: 🛰 X, type: select, proxies: [♻️ 美国自动, ♻️ 日本自动, ♻️ 香港自动, ♻️ 台湾自动, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇹🇼 台湾节点, 🇺🇸 美国节点]}
-  - {name: 📱 Instagram, type: select, proxies: [♻️ 日本自动, ♻️ 美国自动, ♻️ 香港自动, ♻️ 台湾自动, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇹🇼 台湾节点, 🇺🇸 美国节点]}
-  - {name: 🐟 漏网之鱼, type: select, proxies: [🚀 默认代理, ♻️ 香港自动, ♻️ 日本自动, ♻️ 台湾自动, ♻️ 美国自动, ♻️ 自动选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇹🇼 台湾节点, 🇺🇸 美国节点]}
-  - {name: 🇭🇰 香港节点, type: select, include-all: true, filter: "(?i)港|hk|hongkong|hong kong"}
+  - {name: 🚀 默认代理, type: select, proxies: [♻️ 香港自动, ♻️ 日本自动, ♻️ 台湾自动, ♻️ 美国自动, ♻️ 瑞士自动, ♻️ 自动选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇹🇼 台湾节点, 🇺🇸 美国节点, 🇨🇭 瑞士节点]}
+  - {name: 📹 YouTube, type: select, proxies: [♻️ 美国自动, ♻️ 香港自动, ♻️ 日本自动, ♻️ 台湾自动, ♻️ 瑞士自动, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇹🇼 台湾节点, 🇺🇸 美国节点, 🇨🇭 瑞士节点]}
+  - {name: 🍀 Google, type: select, proxies: [♻️ 美国自动, ♻️ 日本自动, ♻️ 香港自动,  ♻️ 台湾自动, ♻️ 瑞士自动, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇹🇼 台湾节点, 🇺🇸 美国节点, 🇨🇭 瑞士节点]}
+  - {name: 🤖 ChatGPT, type: select, proxies: [♻️ 美国自动, ♻️ 日本自动, ♻️ 香港自动, ♻️ 台湾自动, ♻️ 瑞士自动,  🇭🇰 香港节点, 🇯🇵 日本节点, 🇹🇼 台湾节点, 🇺🇸 美国节点, 🇨🇭 瑞士节点]}
+  - {name: 👨🏿‍💻 GitHub, type: select, proxies: [♻️ 瑞士自动, ♻️ 日本自动, ♻️ 香港自动, ♻️ 台湾自动, ♻️ 瑞士自动,  ♻️ 美国自动, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇹🇼 台湾节点, 🇺🇸 美国节点, 🇨🇭 瑞士节点]}
+  - {name: 🐬 OneDrive, type: select, proxies: [♻️ 美国自动, ♻️ 日本自动, ♻️ 香港自动, ♻️ 台湾自动, ♻️ 瑞士自动,  🇭🇰 香港节点, 🇯🇵 日本节点, 🇹🇼 台湾节点, 🇺🇸 美国节点, 🇨🇭 瑞士节点]}
+  - {name: 🙉 Microsoft, type: select, proxies: [♻️ 美国自动, ♻️ 日本自动, ♻️ 香港自动, ♻️ 台湾自动, ♻️ 瑞士自动,  🇭🇰 香港节点, 🇯🇵 日本节点, 🇹🇼 台湾节点, 🇺🇸 美国节点, 🇨🇭 瑞士节点]}
+  - {name: 🎵 TikTok, type: select, proxies: [♻️ 美国自动, ♻️ 日本自动, ♻️ 香港自动, ♻️ 台湾自动, ♻️ 瑞士自动,  🇭🇰 香港节点, 🇯🇵 日本节点, 🇹🇼 台湾节点, 🇺🇸 美国节点, 🇨🇭 瑞士节点]}
+  - {name: 📲 Telegram, type: select, proxies: [♻️ 日本自动, ♻️ 香港自动, ♻️ 台湾自动, ♻️ 美国自动, ♻️ 瑞士自动,  🇭🇰 香港节点, 🇯🇵 日本节点, 🇹🇼 台湾节点, 🇺🇸 美国节点, 🇨🇭 瑞士节点]}
+  - {name: 🎥 NETFLIX, type: select, proxies: [♻️ 美国自动, ♻️ 日本自动, ♻️ 香港自动, ♻️ 台湾自动, ♻️ 瑞士自动,  🇭🇰 香港节点, 🇯🇵 日本节点, 🇹🇼 台湾节点, 🇺🇸 美国节点, 🇨🇭 瑞士节点]}
+  - {name: 🛰 X, type: select, proxies: [♻️ 美国自动, ♻️ 日本自动, ♻️ 香港自动, ♻️ 台湾自动, ♻️ 瑞士自动,  🇭🇰 香港节点, 🇯🇵 日本节点, 🇹🇼 台湾节点, 🇺🇸 美国节点, 🇨🇭 瑞士节点]}
+  - {name: 📱 Instagram, type: select, proxies: [♻️ 日本自动, ♻️ 美国自动, ♻️ 香港自动, ♻️ 台湾自动, ♻️ 瑞士自动,  🇭🇰 香港节点, 🇯🇵 日本节点, 🇹🇼 台湾节点, 🇺🇸 美国节点, 🇨🇭 瑞士节点]}
+  - {name: 🐟 漏网之鱼, type: select, proxies: [🚀 默认代理, ♻️ 香港自动, ♻️ 日本自动, ♻️ 台湾自动, ♻️ 美国自动, ♻️ 瑞士自动,  ♻️ 自动选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇹🇼 台湾节点, 🇺🇸 美国节点, 🇨🇭 瑞士节点]}
+  - {name: 🇭🇰 香港节点, type: select, include-all: true, filter: "(?i)港|HK|hongkong|hong kong"}
   - {name: 🇯🇵 日本节点, type: select, include-all: true, filter: "(?i)日|jp|japan"}
   - {name: 🇹🇼 台湾节点, type: select, include-all: true, filter: "(?i)台|TW|Taiwan"}
-  - {name: 🇺🇸 美国节点, type: select, include-all: true, filter: "(?i)美|us|unitedstates|united states"}
-  - {name: ♻️ 香港自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(港|HK|(?i)Hong))^((?!(台|日|韩|新|深|美)).)*$"}
-  - {name: ♻️ 日本自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(日|JP|(?i)Japan))^((?!(港|台|韩|新|美)).)*$"}
-  - {name: ♻️ 台湾自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(台|TW|(?i)Taiwan))^((?!(港|新|韩|日|美)).)*$"}
-  - {name: ♻️ 美国自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(美|US|(?i)States|America))^((?!(港|台|日|韩|新)).)*$"}
-  - {name: ♻️ 自动选择, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "^((?!(直连)).)*$"}
-  - {name: 🔯 故障转移, type: fallback, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(美|US|(?i)States|America))^((?!(港|台|韩|新|日)).)*$"}
-  - {name: 🌐 全部节点, type: select, include-all: true, filter: "^((?!(直连)).)*$"}
-  - {name: ⛔ 广告过滤, type: select, proxies: [REJECT]}
+  - {name: 🇺🇸 美国节点, type: select, include-all: true, filter: "(?i)美|US|unitedstates|united states"}
+  - {name: 🇨🇭 瑞士节点, type: select, include-all: true, filter: "(?i)瑞|CH|switzerland"}
+  - {name: ♻️ 香港自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(港|HK|(?i)Hong))^((?!(台|日|韩|新|深|美|瑞)).)*$"}
+  - {name: ♻️ 日本自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(日|JP|(?i)Japan))^((?!(港|台|韩|新|美|瑞)).)*$"}
+  - {name: ♻️ 台湾自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(台|TW|(?i)Taiwan))^((?!(港|新|韩|日|美|瑞)).)*$"}
+  - {name: ♻️ 美国自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(美|US|(?i)States|America))^((?!(港|台|日|韩|新|瑞)).)*$"}
+  - {name: ♻️ 瑞士自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(瑞|CH|(?i)Switzerland))^((?!(港|台|日|韩|新|美)).)*$"}
+  - {name: ♻️ 自动选择, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "^((?!(🟢 直连)).)*$"}
+  - {name: 🔯 故障转移, type: fallback, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(美|US|(?i)States|America))^((?!(港|台|韩|新|日|瑞)).)*$"}
+  - {name: 🌐 全部节点, type: select, include-all: true, filter: "^((?!(🟢 直连|🔴 拒绝)).)*$"}
+  - {name: ⛔ 广告过滤, type: select, proxies: [🔴 拒绝, 🟢 直连]}
 
 
 rules:
   - RULE-SET,adblock / domain,⛔ 广告过滤
-  - RULE-SET,private / ip,直连,no-resolve
-  - RULE-SET,private / domain,直连
+  - RULE-SET,private / ip,🟢 直连,no-resolve
+  - RULE-SET,private / domain,🟢 直连
   - RULE-SET,proxylite / domain,🚀 默认代理
   - RULE-SET,ai / domain,🤖 ChatGPT
   - RULE-SET,github / domain,👨🏿‍💻 GitHub
@@ -90,18 +95,18 @@ rules:
   - RULE-SET,instagram / domain,📱 Instagram
   - RULE-SET,onedrive / domain,🐬 OneDrive
   - RULE-SET,microsoft / domain,🙉 Microsoft
-  - RULE-SET,apple / domain,直连
+  - RULE-SET,apple / domain,🟢 直连
   - RULE-SET,tiktok / domain,🎵 TikTok
   - RULE-SET,telegram / domain,📲 Telegram
   - RULE-SET,netflix / domain,🎥 NETFLIX
   - RULE-SET,x / domain,🛰 X
-  - RULE-SET,apple / ip,直连,no-resolve
+  - RULE-SET,apple / ip,🟢 直连,no-resolve
   - RULE-SET,google / ip,🍀 Google,no-resolve
   - RULE-SET,netflix / ip,🎥 NETFLIX,no-resolve
   - RULE-SET,telegram / ip,📲 Telegram,no-resolve
   - RULE-SET,geolocation-!cn / domain,🚀 默认代理
-  - RULE-SET,cn / domain,直连
-  - RULE-SET,cn / ip,直连
+  - RULE-SET,cn / domain,🟢 直连
+  - RULE-SET,cn / ip,🟢 直连
   - MATCH,🐟 漏网之鱼
 
 
@@ -128,7 +133,6 @@ rule-providers:
   tiktok / domain: {<<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tiktok.mrs"}
   geolocation-!cn / domain: {<<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs"}
   instagram / domain: {<<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/instagram.mrs"}
-  geolocation-!cn / domain: {<<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs"}
   cn / domain: {<<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"}
   private / ip: {<<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.mrs"}
   cn / ip: {<<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"}
