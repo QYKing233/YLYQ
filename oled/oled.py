@@ -25,7 +25,7 @@ class OLEDMonitor:
     def __init__(self):
         # 初始化硬件
         self.device = sh1106(i2c(port=1, address=0x3C))
-        self.font = ImageFont.truetype("/etc/oled/ter-u12n.bdf", 12)
+        self.font = ImageFont.truetype("/etc/oled/spleen.bdf", 12)
         self.logo = Image.open("/etc/oled/logo.png").resize((self.device.width, self.device.height))
         self.boot = Image.open("/etc/oled/boot.png").resize((self.device.width, self.device.height))
         self.device.contrast(50)
@@ -84,14 +84,14 @@ class OLEDMonitor:
             if data['fan'] == 1:
                 draw.text((0, 0), f"{'*':>21}", fill=255, font=self.font)
             # 主体信息
-            draw.text((0, 0), f"REC:{data['net'][0]}", fill=255, font=self.font)
-            draw.text((0, 10), f"SEN:{data['net'][1]}", fill=255, font=self.font)
-            draw.text((0, 21), f"LAN:{data['ip']}", font=self.font, fill=255)
-            draw.text((0, 32), f"RAM:{format_size(data['mem'].used)}/{format_size(data['mem'].total)}", fill=255,
+            draw.text((2, 0), f"REC:{data['net'][0]}", fill=255, font=self.font)
+            draw.text((2, 10), f"SEN:{data['net'][1]}", fill=255, font=self.font)
+            draw.text((2, 21), f"LAN:{data['ip']}", font=self.font, fill=255)
+            draw.text((2, 32), f"RAM:{format_size(data['mem'].used)}/{format_size(data['mem'].total)}", fill=255,
                       font=self.font)
-            draw.text((0, 43), f"HDD:{format_size(data['disk'].used)}/{format_size(data['disk'].total)}", fill=255,
+            draw.text((2, 43), f"HDD:{format_size(data['disk'].used)}/{format_size(data['disk'].total)}", fill=255,
                       font=self.font)
-            draw.text((0, 54), f"CPU:{int(data['freq'])}MHz|{int(data['cpu'])}%|{int(data['temp'])}°C", font=self.font,
+            draw.text((2, 54), f"CPU:{int(data['freq'])}MHz|{int(data['cpu'])}%|{int(data['temp'])}°C", font=self.font,
                       fill=255)
 
         self.device.show()
@@ -118,7 +118,7 @@ class OLEDMonitor:
                 if self.counter >= 60:  # 60s
                     with canvas(self.device) as draw:
                         draw.bitmap((0, 0), self.logo, fill=255)
-                        draw.text((21, 54), "O P E N W R T", fill=255, font=self.font)
+                        draw.text((24, 54), "O P E N W R T", fill=255, font=self.font)
                     self.device.show()
                     time.sleep(10)
                     self._shutdown()
