@@ -85,13 +85,13 @@ class OLEDMonitor:
                 draw.text((0, 0), f"{'*':>21}", fill=255, font=self.font)
             # 主体信息
             draw.text((2, 0), f"REC:{data['net'][0]}", fill=255, font=self.font)
-            draw.text((2, 10), f"SEN:{data['net'][1]}", fill=255, font=self.font)
-            draw.text((2, 21), f"LAN:{data['ip']}", font=self.font, fill=255)
-            draw.text((2, 32), f"RAM:{format_size(data['mem'].used)}/{format_size(data['mem'].total)}", fill=255,
+            draw.text((2, 11), f"SEN:{data['net'][1]}", fill=255, font=self.font)
+            draw.text((2, 22), f"LAN:{data['ip']}", font=self.font, fill=255)
+            draw.text((2, 33), f"RAM:{format_size(data['mem'].used)}/{format_size(data['mem'].total)}", fill=255,
                       font=self.font)
-            draw.text((2, 43), f"HDD:{format_size(data['disk'].used)}/{format_size(data['disk'].total)}", fill=255,
+            draw.text((2, 44), f"HDD:{format_size(data['disk'].used)}/{format_size(data['disk'].total)}", fill=255,
                       font=self.font)
-            draw.text((2, 54), f"CPU:{int(data['freq'])}MHz|{int(data['cpu'])}%|{int(data['temp'])}°C", font=self.font,
+            draw.text((2, 55), f"CPU:{int(data['freq'])}MHz|{int(data['cpu'])}%|{int(data['temp'])}°C", font=self.font,
                       fill=255)
 
         self.device.show()
